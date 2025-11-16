@@ -1,16 +1,17 @@
-
 const mongoose = require("mongoose");
 
 const ProfileSchema = new mongoose.Schema(
   {
+    profileImage: String,
     name: String,
     designation: String,
-    imageUrl: String,
-    shortBio: String,
-    longBio: String,
+    department: String,
+    institute: String,
 
+    biography: String,
+
+    professionalExperience: [String],
     education: [String],
-    experience: [String],
     teaching: [String],
     recognition: [String],
   },

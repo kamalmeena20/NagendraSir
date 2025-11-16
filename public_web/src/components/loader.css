@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: calc(16px + (24 - 16)*(100vw - 320px) / (1280 - 320));
+}
+
+body, .preloader {
+  display: flex;
+}
+
+body {
+  background: #000;
+  color: #3df1f1;
+  height: 100vh;
+  line-height: 1.5;
+  perspective: 40em;
+}
+
+/* PRELOADER MAIN */
+.preloader {
+  animation: tiltSpin 8s linear infinite;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 17em;
+  height: 17em;
+  transform-style: preserve-3d;
+}
+
+.preloader__ring {
+  animation: spin 4s linear infinite;
+  font-size: 2em;
+  position: relative;
+  height: 3rem;
+  width: 1.5rem;
+  transform-style: preserve-3d;
+}
+
+/* Reverse even rings */
+.preloader__ring:nth-child(even) {
+  animation-direction: reverse;
+}
+
+/* SECTORS */
+.preloader__sector {
+  font-weight: 600;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  text-transform: uppercase;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  transform: translateZ(7rem);
+}
+
+/* Empty sector gets a line */
+.preloader__sector:empty::before {
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    transparent 45%,
+    currentColor 45% 55%,
+    transparent 55%
+  );
+}
+
+/* Dynamically rotate all 30 sectors */
+.preloader__sector:nth-child(2) { transform: rotateY(calc(360deg/30 * 1)) translateZ(7rem); }
+.preloader__sector:nth-child(3) { transform: rotateY(calc(360deg/30 * 2)) translateZ(7rem); }
+.preloader__sector:nth-child(4) { transform: rotateY(calc(360deg/30 * 3)) translateZ(7rem); }
+.preloader__sector:nth-child(5) { transform: rotateY(calc(360deg/30 * 4)) translateZ(7rem); }
+.preloader__sector:nth-child(6) { transform: rotateY(calc(360deg/30 * 5)) translateZ(7rem); }
+.preloader__sector:nth-child(7) { transform: rotateY(calc(360deg/30 * 6)) translateZ(7rem); }
+.preloader__sector:nth-child(8) { transform: rotateY(calc(360deg/30 * 7)) translateZ(7rem); }
+.preloader__sector:nth-child(9) { transform: rotateY(calc(360deg/30 * 8)) translateZ(7rem); }
+.preloader__sector:nth-child(10) { transform: rotateY(calc(360deg/30 * 9)) translateZ(7rem); }
+.preloader__sector:nth-child(11) { transform: rotateY(calc(360deg/30 * 10)) translateZ(7rem); }
+.preloader__sector:nth-child(12) { transform: rotateY(calc(360deg/30 * 11)) translateZ(7rem); }
+.preloader__sector:nth-child(13) { transform: rotateY(calc(360deg/30 * 12)) translateZ(7rem); }
+.preloader__sector:nth-child(14) { transform: rotateY(calc(360deg/30 * 13)) translateZ(7rem); }
+.preloader__sector:nth-child(15) { transform: rotateY(calc(360deg/30 * 14)) translateZ(7rem); }
+.preloader__sector:nth-child(16) { transform: rotateY(calc(360deg/30 * 15)) translateZ(7rem); }
+.preloader__sector:nth-child(17) { transform: rotateY(calc(360deg/30 * 16)) translateZ(7rem); }
+.preloader__sector:nth-child(18) { transform: rotateY(calc(360deg/30 * 17)) translateZ(7rem); }
+.preloader__sector:nth-child(19) { transform: rotateY(calc(360deg/30 * 18)) translateZ(7rem); }
+.preloader__sector:nth-child(20) { transform: rotateY(calc(360deg/30 * 19)) translateZ(7rem); }
+.preloader__sector:nth-child(21) { transform: rotateY(calc(360deg/30 * 20)) translateZ(7rem); }
+.preloader__sector:nth-child(22) { transform: rotateY(calc(360deg/30 * 21)) translateZ(7rem); }
+.preloader__sector:nth-child(23) { transform: rotateY(calc(360deg/30 * 22)) translateZ(7rem); }
+.preloader__sector:nth-child(24) { transform: rotateY(calc(360deg/30 * 23)) translateZ(7rem); }
+.preloader__sector:nth-child(25) { transform: rotateY(calc(360deg/30 * 24)) translateZ(7rem); }
+.preloader__sector:nth-child(26) { transform: rotateY(calc(360deg/30 * 25)) translateZ(7rem); }
+.preloader__sector:nth-child(27) { transform: rotateY(calc(360deg/30 * 26)) translateZ(7rem); }
+.preloader__sector:nth-child(28) { transform: rotateY(calc(360deg/30 * 27)) translateZ(7rem); }
+.preloader__sector:nth-child(29) { transform: rotateY(calc(360deg/30 * 28)) translateZ(7rem); }
+.preloader__sector:nth-child(30) { transform: rotateY(calc(360deg/30 * 29)) translateZ(7rem); }
+
+/* Animations */
+@keyframes tiltSpin {
+  from {
+    transform: rotateY(0) rotateX(30deg);
+  }
+  to {
+    transform: rotateY(1turn) rotateX(30deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotateY(0);
+  }
+  to {
+    transform: rotateY(1turn);
+  }
+}

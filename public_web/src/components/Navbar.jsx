@@ -1,25 +1,55 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 export default function Navbar() {
   const mainColor = "#009E66";
+  const location = useLocation();
+  const navRef = useRef(null);
+
+  const [indicatorStyle, setIndicatorStyle] = useState({
+    width: 0,
+    left: 0
+  });
+
+  // Move indicator on route change
+  useEffect(() => {
+    const activeLink = navRef.current?.querySelector(".active-link");
+    if (activeLink) {
+      setIndicatorStyle({
+        width: activeLink.offsetWidth,
+        left: activeLink.offsetLeft
+      });
+    }
+  }, [location]);
 
   const navLinkClass = ({ isActive }) =>
-    `text-white text-[16px] font-regular px-4 py-1.5 rounded-full transition-all
-     ${isActive ? "bg-white text-[#009E66]" : "hover:bg-white/20"}`;
+  `text-[18px] font-regular px-4 py-1.5 rounded-full transition-all
+   ${isActive ? "bg-white text-[#009E66]" : "text-white hover:bg-white hover:text-[#009E66]"}`;
+
 
   return (
-    <div className="flex items-center w-full gap-8 px-10 py-4 bg-white">
+    <div className="flex items-center w-full gap-8 px-10 py-4">
 
       {/* LOGO */}
       <img src={logo} alt="logo" className="w-24" />
 
-      {/* GREEN BAR (SLIM HEIGHT) */}
+      {/* NAVBAR */}
       <div
-        className="flex items-center justify-between w-full px-8 py-2.5 rounded-full shadow-md"
+        ref={navRef}
+        className="relative flex items-center justify-between w-full px-8 py-2.5 rounded-full shadow-md"
         style={{ backgroundColor: mainColor }}
       >
+        {/* Sliding Indicator */}
+        <div
+          className="absolute top-1/2 -translate-y-1/2 h-[34px] bg-white rounded-full transition-all duration-300"
+          style={{
+            width: `${indicatorStyle.width}px`,
+            left: `${indicatorStyle.left}px`
+          }}
+        />
+
+        {/* LINKS */}
         <NavLink to="/" className={navLinkClass}>Home</NavLink>
         <NavLink to="/about" className={navLinkClass}>About</NavLink>
         <NavLink to="/publications" className={navLinkClass}>Publications</NavLink>
