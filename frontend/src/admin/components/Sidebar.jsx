@@ -8,11 +8,11 @@ const menuItems = [
   { name: "Profile", path: "/admin/profile" },
   { name: "Team", path: "/admin/team" },
   { name: "Publications", path: "/admin/publications" },
+  { name: "Career", path: "/admin/career" },
   { name: "Gallery", path: "/admin/gallery" },
   { name: "Readings", path: "/admin/readings" },
   { name: "Contact", path: "/admin/contact" },
   { name: "Collaborators", path: "/admin/collaborators" },
-  { name: "Career", path: "/admin/career" },
 ];
 
 export default function Sidebar() {
