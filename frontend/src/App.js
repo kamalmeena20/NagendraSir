@@ -58,12 +58,14 @@ import Profile from "./admin/pages/Profile";
 import Team from "./admin/pages/Team";
 import Publications from "./admin/pages/Publications";
 import Gallery from "./admin/pages/Gallery";
-import Readings from "./admin/pages/Readings";
+// import Readings from "./admin/pages/Readings";
 import Contact from "./admin/pages/Contact";
 import Collaborators from "./admin/pages/Collaborators";
 import Home from "./admin/pages/Home";
 import About from "./admin/pages/About";
 import Career from "./admin/pages/Career";
+import Reading from "./admin/pages/Readings";
+import AdminGeneralReadings from "./admin/pages/Readings";
 
 function App() {
   return (
@@ -84,12 +86,13 @@ function App() {
           <Route path="team" element={<Team />} />
           <Route path="publications" element={<Publications />} />
           <Route path="gallery" element={<Gallery />} />
-          <Route path="readings" element={<Readings />} />
+          {/* <Route path="readings" element={<Readings />} /> */}
           <Route path="contact" element={<Contact />} />
           <Route path="collaborators" element={<Collaborators />} />
           <Route path="home" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="career" element={<Career />} />
+          <Route path="readings" element={<AdminGeneralReadings />} />
         </Route>
 
       </Routes>

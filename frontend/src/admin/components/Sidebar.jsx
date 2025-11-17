@@ -9,8 +9,8 @@ const menuItems = [
   { name: "Team", path: "/admin/team" },
   { name: "Publications", path: "/admin/publications" },
   { name: "Career", path: "/admin/career" },
+  { name: " General Reading", path: "/admin/readings" },
   { name: "Gallery", path: "/admin/gallery" },
-  { name: "Readings", path: "/admin/readings" },
   { name: "Contact", path: "/admin/contact" },
   { name: "Collaborators", path: "/admin/collaborators" },
 ];

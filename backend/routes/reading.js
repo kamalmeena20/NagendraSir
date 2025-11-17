@@ -1,19 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const auth = require('../middleware/authMiddleware');
-const {
-  addReading,
-  getReadings,
-  updateReading,
-  deleteReading
-} = require('../controllers/readingController');
+const ctrl = require("../controllers/readingController");
+const auth = require("../middleware/authMiddleware");
 
-// public
-router.get('/', getReadings);
+// Admin operations
+router.post("/", auth, ctrl.addReading);
+router.put("/:id", auth, ctrl.updateReading);
+router.delete("/:id", auth, ctrl.deleteReading);
 
-// admin
-router.post('/add', auth, addReading);
-router.put('/update/:id', auth, updateReading);
-router.delete('/delete/:id', auth, deleteReading);
+// Public
+router.get("/", ctrl.getAll);
 
 module.exports = router;
