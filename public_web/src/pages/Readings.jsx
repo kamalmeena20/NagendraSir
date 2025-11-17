@@ -30,18 +30,18 @@ export default function PublicGeneralReadings() {
       </div>
 
       {/* List */}
-      <div className="space-y-12">
+      <div className="space-y-10 ">
         {list.map((item, index) => (
           <div
             key={item._id}
             className="flex border-2 border-[#009E66]  overflow-hidden"
           >
             {/* Left */}
-            <div className="flex-1 p-6 bg-white">
+            <div className="flex-1 h-[20vh] p-6 flex flex-col">
               <h2 className="text-xl font-semibold">
                 {index + 1}. {item.title}
               </h2>
-              <p className="mt-3 leading-relaxed text-gray-700">
+              <p className="mt-3 leading-relaxed text-black">
                 {item.description}
               </p>
             </div>
