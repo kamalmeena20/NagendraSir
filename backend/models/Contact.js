@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const ContactSchema = new mongoose.Schema({
   
   // Profile Info
-  photoUrl: { type: String },          // Sir image
-  name: { type: String },              // Sir name
-  profession: { type: String },        // Sir designation
+  photoUrl: { type: String },          
+  name: { type: String },            
+  profession: { type: String },       
   
   // Department
   department: { type: String },
@@ -15,11 +15,11 @@ const ContactSchema = new mongoose.Schema({
   emailSecondary: { type: String },
 
   // Address
-  addressLine1: { type: String },      // Example: Sector-28
-  city: { type: String },              // Gandhinagar
-  state: { type: String },             // Gujarat
-  pincode: { type: String },           // 382028
-  landmark: { type: String },          // Near IITV or any landmark
+  addressLine1: { type: String },      
+  city: { type: String },             
+  state: { type: String },             
+  pincode: { type: String },          
+  landmark: { type: String },          
 
 }, { timestamps: true });
 

@@ -12,6 +12,7 @@ const menuItems = [
   { name: "Readings", path: "/admin/readings" },
   { name: "Contact", path: "/admin/contact" },
   { name: "Collaborators", path: "/admin/collaborators" },
+  { name: "Career", path: "/admin/career" },
 ];
 
 export default function Sidebar() {

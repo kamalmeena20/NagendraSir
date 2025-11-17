@@ -63,6 +63,7 @@ import Contact from "./admin/pages/Contact";
 import Collaborators from "./admin/pages/Collaborators";
 import Home from "./admin/pages/Home";
 import About from "./admin/pages/About";
+import Career from "./admin/pages/Career";
 
 function App() {
   return (
@@ -88,6 +89,7 @@ function App() {
           <Route path="collaborators" element={<Collaborators />} />
           <Route path="home" element={<Home />} />
           <Route path="about" element={<About />} />
+          <Route path="career" element={<Career />} />
         </Route>
 
       </Routes>
