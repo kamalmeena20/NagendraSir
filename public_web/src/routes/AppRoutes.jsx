@@ -18,7 +18,7 @@ export default function AppRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/team" element={<Team />} />
-        <Route path="/Career" element={<CareerOpportunities />} />
+        <Route path="/career" element={<CareerOpportunities />} />
         <Route path="/publications" element={<Publications />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/readings" element={<Readings />} />
