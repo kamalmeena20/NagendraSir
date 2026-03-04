@@ -20,47 +20,48 @@ export default function PublicGeneralReadings() {
 
   return (
     <>
-      <Navbar/>
-    <div className="max-w-6xl px-4 py-16 mx-auto">
-      {/* Heading */}
-      <div className="flex justify-center mb-16">
-        <h1 className="border-2 border-[#009E66] text-[#009E66] text-4xl font-semibold px-10 py-4 ">
-          General Readings
-        </h1>
-      </div>
+      <Navbar />
+      <div className="max-w-6xl px-4 py-16 mx-auto">
+        {/* Heading */}
+        <div className="flex justify-center mb-16">
+          <h1 className="border-2 border-[#009E66] text-[#009E66] text-4xl font-semibold px-10 py-4 ">
+            General Readings
+          </h1>
+        </div>
 
-      {/* List */}
-      <div className="space-y-10 ">
-        {list.map((item, index) => (
-          <div
-            key={item._id}
-            className="flex border-2 border-[#009E66]  overflow-hidden"
-          >
-            {/* Left */}
-            <div className="flex-1 h-[20vh] p-6 flex flex-col">
-              <h2 className="text-xl font-semibold">
-                {index + 1}. {item.title}
-              </h2>
-              <p className="mt-3 leading-relaxed text-black">
-                {item.description}
-              </p>
+        {/* List */}
+        <div className="space-y-10 ">
+          {list.map((item, index) => (
+            <div
+              key={item._id}
+              className="flex border-2 border-[#009E66]  overflow-hidden"
+            >
+              {/* Left */}
+              <div className="flex-1 h-[20vh] p-6 flex flex-col">
+                <h2 className="text-xl font-semibold">
+                  {index + 1}. {item.title}
+                </h2>
+                <p className="mt-3 leading-relaxed text-black">
+                  {item.description}
+                </p>
+              </div>
+
+              {/* Right */}
+              <div className="w-64 bg-[#009E66] flex items-center justify-center">
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="border border-white text-white px-8 py-3 text-lg hover:bg-white hover:text-[#009E66] transition"
+                >
+                  Open Reading
+                </a>
+              </div>
             </div>
+          ))}
+        </div>
 
-            {/* Right */}
-            <div className="w-64 bg-[#009E66] flex items-center justify-center">
-              <a
-                href={item.link}
-                target="_blank"
-                className="border border-white text-white px-8 py-3 text-lg  hover:bg-white hover:text-[#009E66] transition"
-              >
-                Open Reading 
-              </a>
-            </div>
-          </div>
-        ))}
       </div>
-
-    </div>
     </>
   );
 }

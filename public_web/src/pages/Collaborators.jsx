@@ -6,8 +6,6 @@ export default function Collaborators() {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const mainColor = "#009E66";
-
   // Load data from backend
   const loadData = async () => {
     try {

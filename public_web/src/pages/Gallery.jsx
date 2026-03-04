@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import api from "../api/api";
 
 export default function Gallery() {
-  const mainColor = "#009E66";
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
 
