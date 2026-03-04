@@ -31,7 +31,6 @@ export default function Home() {
     <div className="w-full min-h-screen ">
       <Navbar />
 
-      {/* TEXT SECTION */}
       <div className="px-20  max-w-[1300px] mx-auto">
         <p className="text-[20px] leading-relaxed ">
           The Nagendra Lab is part of the Department of Physical Sciences,
@@ -42,11 +41,9 @@ export default function Home() {
         </p>
       </div>
 
-      {/* IMAGES SECTION */}
       <div className="flex justify-center items-center gap-12 px-20 mt-[-40px] max-w-[1300px] mx-auto">
 
         <div className="w-[60%] flex justify-center">
-          {/* aiDigital BIG (100%) */}
           <Lottie
             animationData={aiDigital}
             loop={true}
@@ -55,7 +52,6 @@ export default function Home() {
         </div>
 
         <div className="w-[39%] flex justify-center">
-          {/* Robot SMALL (50%) */}
           <Lottie
             animationData={Robot3D}
             loop={true}
@@ -66,7 +62,6 @@ export default function Home() {
 
       </div>
 
-      {/* CONTINUE BUTTON */}
       <div className="w-full flex justify-end mt-[-40px] max-w-[1300px] mx-auto">
         <button
           onClick={() => navigate("/about")}
