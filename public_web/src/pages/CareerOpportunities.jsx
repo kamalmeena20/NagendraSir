@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
-import Navbar from "../components/Navbar";
 import Loader from "../components/Loader";
 import { Helmet } from "react-helmet-async";
-import {PageAnimation} from '../components/PageAnimation'
+import PageAnimation from '../components/PageAnimation'
 
 export default function CareerPublic() {
   const [list, setList] = useState([]);
@@ -50,12 +49,11 @@ export default function CareerPublic() {
 
         <link
           rel="canonical"
-          href="https://nagendra-sir-xkun.vercel.app/career"
+          href="https://nagendra-sir-xkun.vercel.app/#career"
         />
       </Helmet>
 
-      <Navbar />
-
+  
       <div className="flex flex-col items-center w-full max-w-6xl px-4 py-10 mx-auto">
 
         {/* PAGE TITLE */}

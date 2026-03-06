@@ -17,3 +17,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html{
+  scroll-behavior:smooth;
+}
+
+/* ADD THIS */
+section{
+  min-height:100vh;
+  padding-top:100px;
+}

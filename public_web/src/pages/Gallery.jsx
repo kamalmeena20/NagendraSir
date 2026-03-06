@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import api from "../api/api";
 import Loader from "../components/Loader";
 import { Helmet } from "react-helmet-async";
-import { PageAnimation } from "../components/PageAnimation";
+import  PageAnimation  from "../components/PageAnimation";
 
 export default function Gallery() {
   const [images, setImages] = useState([]);
@@ -44,11 +43,9 @@ export default function Gallery() {
 
         <link
           rel="canonical"
-          href="https://nagendra-sir-xkun.vercel.app/gallery"
+          href="https://nagendra-sir-xkun.vercel.app/#gallery"
         />
       </Helmet>
-
-      <Navbar />
 
       {/* PAGE TITLE */}
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center text-[#009E66] mt-10 mb-10 py-2 px-6 border-2 border-[#009e66]">

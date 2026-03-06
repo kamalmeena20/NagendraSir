@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import api from "../api/api";
 import Loader from "../components/Loader";
 import { Helmet } from "react-helmet-async";
-import { PageAnimation } from "../components/PageAnimation";
+import PageAnimation  from "../components/PageAnimation";
 
 export default function Team() {
 
@@ -42,11 +41,8 @@ export default function Team() {
 
         <meta name="robots" content="index, follow" />
 
-        <link rel="canonical" href="https://nagendra-sir-xkun.vercel.app/team" />
+        <link rel="canonical" href="https://nagendra-sir-xkun.vercel.app/#team" />
       </Helmet>
-
-      <Navbar />
-
       <h1 className="text-3xl md:text-4xl font-semibold text-center text-[#009E66] mt-10 mb-12 py-2 px-8 md:px-10 border-2 border-[#009e66] w-fit">
         Team
       </h1>

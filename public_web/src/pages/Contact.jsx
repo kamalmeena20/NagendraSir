@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import api from "../api/api";
 import mapimage from "../assets/mapimage.jpg";
 import Loader from "../components/Loader";
 import { Helmet } from "react-helmet-async";
-import { PageAnimation } from "../components/PageAnimation";
+import  PageAnimation  from "../components/PageAnimation";
 
 export default function Contact() {
     const mainColor = "#009E66";
@@ -43,11 +42,9 @@ export default function Contact() {
 
                 <link
                     rel="canonical"
-                    href="https://nagendra-sir-xkun.vercel.app/contact"
+                    href="https://nagendra-sir-xkun.vercel.app/#contact"
                 />
             </Helmet>
-
-            <Navbar />
 
             {/* PAGE TITLE */}
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mt-10 mb-10 py-2 px-6 sm:px-10 border-2 border-[#009e66] text-[#009E66]">

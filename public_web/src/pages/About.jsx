@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import api from "../api/api";
 import Loader from "../components/Loader";
 import { Helmet } from "react-helmet-async";
-import { PageAnimation } from "../components/PageAnimation";
+import PageAnimation  from "../components/PageAnimation";
 
 export default function About() {
 
@@ -42,11 +41,9 @@ export default function About() {
 
         <link
           rel="canonical"
-          href="https://nagendra-sir-xkun.vercel.app/about"
+          href="https://nagendra-sir-xkun.vercel.app/#about"
         />
       </Helmet>
-
-      <Navbar />
 
       {/* IMAGE */}
       {data.image && (

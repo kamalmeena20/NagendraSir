@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
-import Navbar from "../components/Navbar";
 import Loader from "../components/Loader";
 import { Helmet } from "react-helmet-async";
-import { PageAnimation } from "../components/PageAnimation";
+import  PageAnimation  from "../components/PageAnimation";
 
 export default function Collaborators() {
   const [list, setList] = useState([]);
@@ -41,11 +40,10 @@ export default function Collaborators() {
 
         <link
           rel="canonical"
-          href="https://nagendra-sir-xkun.vercel.app/collaborators"
+          href="https://nagendra-sir-xkun.vercel.app/#collaborators"
         />
       </Helmet>
 
-      <Navbar />
 
       {/* PAGE TITLE */}
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mt-10 mb-10 py-2 px-6 border-2 border-[#009E66] text-[#009E66]">

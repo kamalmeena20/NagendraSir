@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 
 /* PAGE LOAD ANIMATION */
-export function PageAnimation({ children }) {
-  return (
+export default function PageAnimation({ children }) {
+    return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}

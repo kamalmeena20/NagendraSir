@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
-import Navbar from "../components/Navbar";
 import Loader from "../components/Loader";
 import { Helmet } from "react-helmet-async";
-import { PageAnimation } from "../components/PageAnimation";
+import  PageAnimation  from "../components/PageAnimation";
 
 export default function UserPublications() {
 
@@ -46,11 +45,9 @@ export default function UserPublications() {
 
         <link
           rel="canonical"
-          href="https://nagendra-sir-xkun.vercel.app/publications"
+          href="https://nagendra-sir-xkun.vercel.app/#publications"
         />
       </Helmet>
-
-      <Navbar />
 
       {/* Heading */}
       <h1

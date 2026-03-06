@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import ExperienceModal from "../components/profileModal/ExperienceModal";
 import EducationModal from "../components/profileModal/EducationModal";
 import TeachingModal from "../components/profileModal/TeachingModal";
@@ -7,7 +6,7 @@ import RecognitionModal from "../components/profileModal/RecognitionModal";
 import api from "../api/api";
 import Loader from "../components/Loader";
 import { Helmet } from "react-helmet-async";
-import { PageAnimation } from "../components/PageAnimation";
+import  PageAnimation  from "../components/PageAnimation";
 
 export default function Profile() {
 
@@ -45,10 +44,8 @@ export default function Profile() {
         <title>Profile | Dr Nagendra Kumar</title>
         <meta name="description" content="PhD, PDRF, internship and research opportunities in Nagendra Lab." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://nagendra-sir-xkun.vercel.app/profile" />
+        <link rel="canonical" href="https://nagendra-sir-xkun.vercel.app/#profile" />
       </Helmet>
-
-      <Navbar />
 
       {/* PAGE TITLE */}
       <h1 className="text-3xl md:text-4xl font-semibold text-center text-[#009E66] mt-10 mb-12 py-2 px-10 border-2 border-[#009e66] w-fit">
