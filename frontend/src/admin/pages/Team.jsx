@@ -19,12 +19,10 @@ export default function Team() {
 
   });
 
-  // upload state to prevent saving before upload completes
+
   const [uploading, setUploading] = useState(false);
 
-  // -----------------------
-  // Load Data
-  // -----------------------
+
   const loadTeam = async () => {
     try {
       const res = await api.get("/team");
@@ -40,52 +38,30 @@ export default function Team() {
   }, []);
 
   useEffect(() => {
-    // console.log("TEAM DATA:", members);
   }, [members]);
 
-  // -----------------------
-  // Image Upload
-  // -----------------------
-  const uploadTeamImage = async (e) => {
-    const file = e.target.files[0];
-    if (!file) {
-      // console.log("No file selected");
-      return;
-    }
+const uploadTeamImage = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
 
-    // console.log("Selected File:", file);
+  const formData = new FormData();
+  formData.append("image", file);
 
-    const formData = new FormData();
-    formData.append("image", file);
+  try {
+    setUploading(true);
 
-    try {
-      setUploading(true);
-      const token = localStorage.getItem("token");
-      // console.log("TOKEN:", token);
+    const res = await api.post("/upload/image", formData);
 
-      const res = await api.post("/upload/image", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    setForm((prev) => ({ ...prev, imageUrl: res.data.url }));
 
-      // console.log("UPLOAD RESULT:", res.data);
-      // console.log("IMAGE URL RECEIVED:", res.data.url);
+  } catch (err) {
+    console.error("UPLOAD FAILED:", err.response?.data || err);
+    alert("Upload failed");
+  } finally {
+    setUploading(false);
+  }
+};
 
-      // set the returned url into the form
-      setForm((prev) => ({ ...prev, imageUrl: res.data.url }));
-    } catch (err) {
-      console.error("UPLOAD FAILED:", err.response?.data || err);
-      alert("Upload failed");
-    } finally {
-      setUploading(false);
-    }
-  };
-
-  // -----------------------
-  // Open Add/Edit Modal
-  // -----------------------
   const openAddModal = () => {
 setForm({
   name: "",
@@ -109,10 +85,6 @@ setForm({
     setEditId(member._id);
     setShowModal(true);
   };
-
-  // -----------------------
-  // Save (Add / Edit)
-  // -----------------------
   const saveMember = async () => {
     try {
       if (uploading) {
@@ -120,16 +92,13 @@ setForm({
         return;
       }
 
-      // debug log: what's being sent
       console.log("FORM BEFORE SENDING:", form);
 
       let dataToSend = { ...form };
 
       if (editId) {
-        // Get old member data
+    
         const old = members.find((m) => m._id === editId);
-
-        // If user did NOT upload a new image -> keep old imageUrl
         if ((!form.imageUrl || form.imageUrl === "") && old?.imageUrl) {
           dataToSend.imageUrl = old.imageUrl;
         }
@@ -144,17 +113,12 @@ setForm({
       }
 
       setShowModal(false);
-      // small delay is optional but can help UI consistency
       await loadTeam();
     } catch (err) {
       console.error("SAVE FAILED:", err.response?.data || err);
       alert("Save failed");
     }
   };
-
-  // -----------------------
-  // Delete
-  // -----------------------
   const deleteMember = async (id) => {
     if (!window.confirm("Delete this member?")) return;
 
@@ -181,7 +145,7 @@ setForm({
         </button>
       </div>
 
-      {/* TEAM LIST */}
+   
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {members.map((m) => (
           <div
@@ -239,9 +203,22 @@ setForm({
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/40">
           <div className="p-6 space-y-4 bg-white rounded-lg shadow-lg w-96">
-            <h2 className="text-xl font-semibold text-[#009E66]">
+        
+             <div className="flex items-center justify-between">
+
+               <h2 className="text-xl font-semibold text-[#009E66]">
               {editId ? "Edit Member" : "Add Member"}
             </h2>
+
+              {/* CLOSE BUTTON */}
+              <button
+                onClick={() => setShowModal(false)}
+                className="text-xl font-bold text-gray-500 hover:text-red-500"
+              >
+                ✕
+              </button>
+
+            </div>
 
             <input
               className="w-full p-2 border rounded"
@@ -298,7 +275,7 @@ setForm({
               <button
                 onClick={saveMember}
                 disabled={uploading}
-                className={`px-3 py-1 text-white rounded ${uploading ? "bg-gray-400 cursor-not-allowed" : "bg-[#009E66] hover:bg-[#007a4f]"
+                className={`px-3 py-1 text-white rounded ${uploading ? "bg-[#007a4f] cursor-not-allowed" : "bg-[#009E66] hover:bg-[#007a4f]"
                   }`}
               >
                 {uploading ? "Uploading..." : "Save"}

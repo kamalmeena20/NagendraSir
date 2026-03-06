@@ -67,7 +67,7 @@ export default function Publications() {
   // Delete
   const remove = async (id) => {
     if (!window.confirm("Delete publication?")) return;
-   await api.delete(`/publications/delete/${id}`);
+    await api.delete(`/publications/delete/${id}`);
     loadData();
   };
 
@@ -175,11 +175,24 @@ export default function Publications() {
       {/* MODAL */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/40">
-          <div className="p-6 space-y-4 bg-white rounded shadow w-96">
+          <div className="relative p-6 space-y-4 bg-white rounded shadow w-96">
 
-            <h2 className="text-xl font-semibold">
-              {editId ? "Edit Publication" : "Add Publication"}
-            </h2>
+            {/* HEADER */}
+            <div className="flex items-center justify-between">
+
+              <h2 className="text-xl font-semibold">
+                {editId ? "Edit Publication" : "Add Publication"}
+              </h2>
+
+              {/* CLOSE BUTTON */}
+              <button
+                onClick={() => setShowModal(false)}
+                className="text-xl font-bold text-gray-500 hover:text-red-500"
+              >
+                ✕
+              </button>
+
+            </div>
 
             <input type="file" onChange={uploadThumb} />
 
@@ -215,12 +228,21 @@ export default function Publications() {
               onChange={(e) => setForm({ ...form, paperLink: e.target.value })}
             />
 
-
             <button
-              className="px-4 py-2 bg-[#009E66] text-white rounded"
+              className="px-4 py-2 bg-[#009E66] text-white rounded flex items-center justify-center gap-2 disabled:opacity-60"
               onClick={save}
+              disabled={uploading}
             >
-              Save
+
+              {uploading ? (
+                <>
+                  <span className="w-4 h-4 border-2 border-white rounded-full border-t-transparent animate-spin"></span>
+                  Uploading...
+                </>
+              ) : (
+                "Save"
+              )}
+
             </button>
 
           </div>

@@ -29,8 +29,13 @@ export default function Gallery() {
 
   // Upload Image to Cloudinary
   const uploadGalleryImage = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  const file = e.target.files[0];
+  if (!file) return;
+
+  if (file.size > 10 * 1024 * 1024) {
+    alert("Max image size is 10MB");
+    return;
+  }
 
     const fd = new FormData();
     fd.append("image", file);
@@ -98,7 +103,8 @@ export default function Gallery() {
         {images.map((img) => (
           <div key={img._id} className="p-3 bg-white rounded-lg shadow">
             <img
-              src={img.imageUrl}
+              alt=""
+              src={`${img.imageUrl}?f_auto,q_auto`}
               className="object-cover w-full h-48 rounded"
             />
 
@@ -136,11 +142,24 @@ export default function Gallery() {
       {/* MODAL */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/40">
-          <div className="p-6 space-y-4 bg-white rounded-lg shadow w-96">
+          <div className="relative p-6 space-y-4 bg-white rounded-lg shadow w-96">
 
-            <h2 className="text-xl font-semibold text-[#009E66]">
-              {editId ? "Edit Image" : "Add Image"}
-            </h2>
+            {/* HEADER */}
+            <div className="flex items-center justify-between">
+
+              <h2 className="text-xl font-semibold text-[#009E66]">
+                {editId ? "Edit Image" : "Add Image"}
+              </h2>
+
+              {/* CLOSE BUTTON */}
+              <button
+                onClick={() => setShowModal(false)}
+                className="text-xl font-bold text-gray-500 hover:text-red-500"
+              >
+                ✕
+              </button>
+
+            </div>
 
             <input
               type="file"
@@ -150,6 +169,7 @@ export default function Gallery() {
 
             {form.imageUrl && (
               <img
+                alt=""
                 src={form.imageUrl}
                 className="object-cover w-full h-40 border rounded"
               />
@@ -181,9 +201,19 @@ export default function Gallery() {
 
             <button
               onClick={saveImage}
-              className="px-3 py-1 bg-[#009E66] text-white rounded"
+              disabled={uploading}
+              className="px-4 py-2 bg-[#009E66] text-white rounded flex items-center justify-center gap-2 disabled:opacity-60"
             >
-              Save
+
+              {uploading ? (
+                <>
+                  <span className="w-4 h-4 border-2 border-white rounded-full border-t-transparent animate-spin"></span>
+                  Uploading...
+                </>
+              ) : (
+                "Save"
+              )}
+
             </button>
           </div>
         </div>

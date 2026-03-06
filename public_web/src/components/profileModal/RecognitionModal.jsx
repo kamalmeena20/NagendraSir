@@ -2,13 +2,13 @@ export default function RecognitionModal({ open, onClose, mainColor, recognition
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 bg-black/30">
-      <div className="bg-white w-[60%] rounded-3xl shadow-2xl p-10 relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40">
+      <div className="bg-white w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-3xl shadow-2xl p-6 md:p-10 relative">
 
         {/* TITLE */}
-        <div className="flex justify-center w-full mb-10">
+        <div className="flex justify-center w-full mb-6 md:mb-10">
           <h2
-            className="px-10 py-3 text-2xl font-semibold text-center border-2 "
+            className="px-6 py-2 text-xl font-semibold text-center border-2 md:px-10 md:py-3 md:text-2xl"
             style={{ borderColor: mainColor, color: mainColor }}
           >
             Recognition
@@ -17,7 +17,7 @@ export default function RecognitionModal({ open, onClose, mainColor, recognition
 
         {/* CLOSE BUTTON */}
         <button
-          className="absolute text-2xl top-6 right-6"
+          className="absolute text-2xl top-4 right-4 md:top-6 md:right-6"
           style={{ color: mainColor }}
           onClick={onClose}
         >
@@ -25,12 +25,12 @@ export default function RecognitionModal({ open, onClose, mainColor, recognition
         </button>
 
         {/* CONTENT */}
-        <div className="space-y-4 text-lg">
+        <div className="space-y-4 text-base md:text-lg">
           {recognition.length === 0 && <p>No recognitions added.</p>}
 
           {recognition.map((item, index) => (
             <div key={index} className="flex gap-3 text-gray-800">
-              <span className="text-2xl" style={{ color: mainColor }}>•</span>
+              <span className="text-xl md:text-2xl" style={{ color: mainColor }}>•</span>
               <p>{item}</p>
             </div>
           ))}

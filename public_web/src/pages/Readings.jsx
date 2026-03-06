@@ -1,16 +1,22 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
-import Navbar from '../components/Navbar'
+import Navbar from "../components/Navbar";
+import Loader from "../components/Loader";
+import { Helmet } from "react-helmet-async";
+import { PageAnimation } from "../components/PageAnimation";
 
 export default function PublicGeneralReadings() {
   const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const loadData = async () => {
     try {
       const res = await api.get("/readings");
       setList(res.data);
     } catch (err) {
-      console.log("Fetch error:", err);
+      console.log("Readings Fetch error:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -18,50 +24,80 @@ export default function PublicGeneralReadings() {
     loadData();
   }, []);
 
+  if (loading) return <Loader />;
+
   return (
     <>
+     <PageAnimation>
+       <Helmet>
+        <title>General Readings | Nagendra Lab</title>
+
+        <meta
+          name="description"
+          content="General academic readings and recommended research resources from Nagendra Lab."
+        />
+
+        <meta name="robots" content="index, follow" />
+
+        <link
+          rel="canonical"
+          href="https://nagendra-sir-xkun.vercel.app/readings"
+        />
+      </Helmet>
+
       <Navbar />
-      <div className="max-w-6xl px-4 py-16 mx-auto">
-        {/* Heading */}
-        <div className="flex justify-center mb-16">
-          <h1 className="border-2 border-[#009E66] text-[#009E66] text-4xl font-semibold px-10 py-4 ">
+
+      <div className="max-w-6xl px-4 py-10 mx-auto">
+
+        {/* HEADING */}
+        <div className="flex justify-center mb-12">
+          <h1 className="border-2 border-[#009E66] text-[#009E66] text-2xl sm:text-3xl md:text-4xl font-semibold px-6 sm:px-10 py-3 sm:py-4 text-center">
             General Readings
           </h1>
         </div>
 
-        {/* List */}
-        <div className="space-y-10 ">
+        {/* LIST */}
+        <div className="space-y-8">
+
           {list.map((item, index) => (
             <div
               key={item._id}
-              className="flex border-2 border-[#009E66]  overflow-hidden"
+              className="flex flex-col md:flex-row border-2 border-[#009E66] overflow-hidden"
             >
-              {/* Left */}
-              <div className="flex-1 h-[20vh] p-6 flex flex-col">
-                <h2 className="text-xl font-semibold">
+
+              {/* LEFT CONTENT */}
+              <div className="flex flex-col flex-1 p-5 sm:p-6">
+
+                <h2 className="text-lg font-semibold text-white sm:text-xl">
                   {index + 1}. {item.title}
                 </h2>
-                <p className="mt-3 leading-relaxed text-black">
+
+                <p className="mt-3 text-sm leading-relaxed text-gray-300 sm:text-base">
                   {item.description}
                 </p>
+
               </div>
 
-              {/* Right */}
-              <div className="w-64 bg-[#009E66] flex items-center justify-center">
+              {/* RIGHT BUTTON AREA */}
+              <div className="w-full md:w-64 bg-[#009E66] flex items-center justify-center py-6 md:py-0">
+
                 <a
                   href={item.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="border border-white text-white px-8 py-3 text-lg hover:bg-white hover:text-[#009E66] transition"
+                  className="border border-white text-white px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-lg hover:bg-white hover:text-[#009E66] transition"
                 >
                   Open Reading
                 </a>
+
               </div>
             </div>
           ))}
+
         </div>
 
       </div>
+     </PageAnimation>
     </>
   );
 }
