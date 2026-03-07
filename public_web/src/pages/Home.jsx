@@ -4,14 +4,11 @@ import Lottie from "lottie-react";
 import Robot3D from "../assets/RobotBot3D.json";
 import aiDigital from "../assets/aiDigital.json";
 import { Helmet } from "react-helmet-async";
-import Loader from "../components/Loader";
 import PageAnimation from "../components/PageAnimation";
 
 export default function Home() {
 
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  // const navigate = useNavigate();
 
   const loadData = async () => {
     try {
@@ -20,21 +17,20 @@ export default function Home() {
     } catch (err) {
       console.log("Error loading home content:", err);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
     loadData();
   }, []);
 
-  if (loading) return <Loader />;
+
 
   return (
     <PageAnimation>
       <div className="w-full min-h-screen text-white">
 
         <Helmet>
-          <title>Dr Nagendra Kumar</title>
+          <title>Dr Nagendra Kumar | Assistant Professor | IIIT Vadodara</title>
           <meta
             name="description"
             content="Official website of Dr Nagendra Kumar and Nagendra Lab research group. Research, publications, collaborators and academic activities."

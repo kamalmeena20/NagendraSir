@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
+import Loader from "./components/Loader";
+
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Publications from "./pages/Publications";
@@ -9,8 +12,26 @@ import Gallery from "./pages/Gallery";
 import Readings from "./pages/Readings";
 import Contact from "./pages/Contact";
 import Collaborators from "./pages/Collaborators";
+import Footer from "./components/Footer";
 
 export default function App() {
+
+  const [loading,setLoading] = useState(true);
+
+  useEffect(() => {
+
+    const timer = setTimeout(()=>{
+      setLoading(false);
+    },3000); // 3 sec loader
+
+    return ()=> clearTimeout(timer);
+
+  },[]);
+
+  if(loading){
+    return <Loader/>
+  }
+
   return (
     <>
       <Navbar />
@@ -26,6 +47,7 @@ export default function App() {
       <section id="contact"><Contact /></section>
       <section id="collaborators"><Collaborators /></section>
 
+      <Footer />
     </>
   );
 }
