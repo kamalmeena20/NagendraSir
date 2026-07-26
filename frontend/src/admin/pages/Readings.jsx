@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
 
-export default function AdminGeneralReadings() {
+export default function GeneralReadings() {
   const [list, setList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -11,32 +11,32 @@ export default function AdminGeneralReadings() {
     description: "",
     link: "",
   });
-  
-useEffect(() => {
-  loadData();
-}, []);
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   const loadData = async () => {
-  const res = await api.get("/readings");
-  setList(res.data);
-};
+    const res = await api.get("/readings");
+    setList(res.data);
+  };
 
-const save = async () => {
-  if (editingId) {
-    await api.put(`/readings/${editingId}`, form);
-  } else {
-    await api.post("/readings", form);
-  }
-  setModalOpen(false);
-  setEditingId(null);
-  loadData();
-};
+  const save = async () => {
+    if (editingId) {
+      await api.put(`/readings/${editingId}`, form);
+    } else {
+      await api.post("/readings", form);
+    }
+    setModalOpen(false);
+    setEditingId(null);
+    loadData();
+  };
 
-const del = async (id) => {
-  if (!window.confirm("Delete this item?")) return;
-  await api.delete(`/readings/${id}`);
-  loadData();
-};
+  const del = async (id) => {
+    if (!window.confirm("Delete this item?")) return;
+    await api.delete(`/readings/${id}`);
+    loadData();
+  };
 
 
   return (
@@ -63,8 +63,8 @@ const del = async (id) => {
             <a
               href={item.link}
               target="_blank"
+              rel="noopener noreferrer"
               className="inline-block mt-3 text-blue-600 underline"
-
             >
               {item.link}
             </a>

@@ -10,7 +10,7 @@ export default function Navbar() {
 
   return (
     <div className="flex items-center justify-between w-full p-4 bg-white shadow-md">
-      <h2 className="text-xl font-semibold text-[#009E66]"></h2>
+      <h2 className="text-xl font-semibold text-[#009E66]">Admin Panel</h2>
 
       <button
         onClick={handleLogout}

@@ -25,7 +25,7 @@ export default function Navbar() {
         className="lg:hidden text-white bg-[#009E66] px-3 py-2 rounded-lg"
         onClick={() => setMenuOpen(true)}
       >
-        ☰
+        ☰  
       </button>
 
       {/* DESKTOP NAVBAR */}

@@ -10,7 +10,7 @@ export default function AdminSignup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post("/auth/register", { username, password });
+    await api.post("/auth/register", { username, password });
       setMessage("Signup Successful!");
     } catch (err) {
       setMessage("Signup failed");
