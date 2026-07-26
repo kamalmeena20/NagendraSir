@@ -3,7 +3,6 @@ import logo from "../assets/logo.png";
 
 export default function Navbar() {
 
-  const mainColor = "#009E66";
   const navRef = useRef(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
