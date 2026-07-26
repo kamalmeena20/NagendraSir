@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
-import Lottie from "lottie-react";
-import Robot3D from "../assets/RobotBot3D.json";
-import aiDigital from "../assets/aiDigital.json";
 import { Helmet } from "react-helmet-async";
 import PageAnimation from "../components/PageAnimation";
 
 export default function Home() {
-
   const [data, setData] = useState(null);
 
   const loadData = async () => {
@@ -23,36 +19,41 @@ export default function Home() {
     loadData();
   }, []);
 
-
-
   return (
     <PageAnimation>
       <div className="w-full min-h-screen text-white">
 
         <Helmet>
           <title>Dr Nagendra Kumar | Assistant Professor | IIIT Vadodara</title>
+
           <meta
             name="description"
             content="Official website of Dr Nagendra Kumar and Nagendra Lab research group. Research, publications, collaborators and academic activities."
           />
+
           <meta
             name="keywords"
             content="Dr Nagendra Kumar, Nagendra Lab, Research Lab, Computer Science Research"
           />
+
           <meta name="robots" content="index, follow" />
-          <link rel="canonical" href="https://nagendra-sir-xkun.vercel.app/" />
+
+          <link
+            rel="canonical"
+            href="https://nagendra-sir-xkun.vercel.app/"
+          />
         </Helmet>
 
-
         {/* TEXT SECTION */}
-        <div className="px-4 sm:px-6 md:px-10 lg:px-20 max-w-[1300px] mx-auto mt-4">
+        <div className="px-4 sm:px-6 md:px-10 lg:px-20 max-w-[1700px] mx-auto mt-[-45px]">
 
-          <p className="text-[16px] sm:text-[18px] md:text-[20px] leading-relaxed text-left">
+          <p className="text-[15px] sm:text-[16px] md:text-[18px] leading-8 text-left">
 
             The Nagendra Lab is part of the Department of Physical Sciences,
 
             <span className="font-semibold text-[#009e66]">
-              {" "} {data?.title},{" "}
+              {" "}
+              {data?.title},{" "}
             </span>
 
             {data?.description}
@@ -61,44 +62,52 @@ export default function Home() {
 
         </div>
 
+        {/* IMAGE SECTION */}
+        <div className="px-4 sm:px-6 md:px-10 lg:px-20 max-w-[1700px] mx-auto mt-5">
 
-        {/* LOTTIE SECTION */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-10 md:gap-12 px-4 sm:px-6 md:px-20 mt-6 max-w-[1300px] mx-auto">
+          <div className="flex flex-col overflow-hidden shadow-2xl md:flex-row">
 
-          {/* aiDigital animation (always visible) */}
-          <div className="w-full md:w-[60%] flex justify-center">
+            {/* Hero Image */}
+            <div className="w-full md:w-1/2 h-[240px] sm:h-[280px] md:h-[330px] bg-black">
 
-            <Lottie
-              animationData={aiDigital}
-              loop={true}
-              style={{ width: "100%", maxWidth: "500px" }}
-            />
+              {data?.heroImage && (
+                <img
+                  src={data.heroImage}
+                  alt="Hero"
+                  className="object-cover w-full h-full"
+                />
+              )}
 
-          </div>
+            </div>
 
-          {/* Robot animation (only ≥768px) */}
-          <div className="hidden md:flex w-[40%] justify-center">
+            {/* Second Image */}
+            <div className="w-full md:w-1/2 h-[240px] sm:h-[280px] md:h-[330px] bg-black">
 
-            <Lottie
-              animationData={Robot3D}
-              loop={true}
-              style={{ width: "100%", maxWidth: "400px" }}
-            />
+              {data?.secondImage && (
+                <img
+                  src={data.secondImage}
+                  alt="Second"
+                  className="object-cover w-full h-full"
+                />
+              )}
+
+            </div>
 
           </div>
 
         </div>
 
-
         {/* BUTTON */}
-        <div className="w-full flex justify-center md:justify-end px-4 sm:px-6 md:px-20 mt-6 max-w-[1300px] mx-auto">
+        <div className="w-full flex justify-end px-4 sm:px-6 md:px-20 mt-5 max-w-[1700px] mx-auto">
 
           <a href="#about">
+
             <button
-              className="bg-[#009e66] transition text-white text-[16px] md:text-xl px-8 md:px-14 py-3 flex items-center gap-4"
+              className="bg-[#009e66] mt-8 hover:bg-[#008756] transition text-white text-[15px] md:text-[17px] px-10 py-3 flex items-center gap-3"
             >
               Continue →
             </button>
+
           </a>
 
         </div>

@@ -32,7 +32,9 @@ export default function Navbar() {
       <div
         ref={navRef}
         className="relative hidden lg:flex items-center justify-between w-full px-6 lg:px-8 py-2.5 rounded-full shadow-md ml-6"
-        style={{ backgroundColor: mainColor }}
+        style={{
+          background: "linear-gradient(90deg, #353535 0%, #252525 40%, #151515 70%, #009E66 100%)"
+        }}
       >
 
         <a href="#home" className={navLinkClass}>Home</a>
@@ -69,16 +71,16 @@ export default function Navbar() {
               ✕
             </button>
 
-            <a href="#home" className={mobileNavLink} onClick={()=>setMenuOpen(false)}>Home</a>
-            <a href="#about" className={mobileNavLink} onClick={()=>setMenuOpen(false)}>About</a>
-            <a href="#publications" className={mobileNavLink} onClick={()=>setMenuOpen(false)}>Publications</a>
-            <a href="#profile" className={mobileNavLink} onClick={()=>setMenuOpen(false)}>Profile</a>
-            <a href="#team" className={mobileNavLink} onClick={()=>setMenuOpen(false)}>Team</a>
-            <a href="#career" className={mobileNavLink} onClick={()=>setMenuOpen(false)}>Career opportunities</a>
-            <a href="#gallery" className={mobileNavLink} onClick={()=>setMenuOpen(false)}>Gallery</a>
-            <a href="#readings" className={mobileNavLink} onClick={()=>setMenuOpen(false)}>General Readings</a>
-            <a href="#contact" className={mobileNavLink} onClick={()=>setMenuOpen(false)}>Contact us</a>
-            <a href="#collaborators" className={mobileNavLink} onClick={()=>setMenuOpen(false)}>Collaborators</a>
+            <a href="#home" className={mobileNavLink} onClick={() => setMenuOpen(false)}>Home</a>
+            <a href="#about" className={mobileNavLink} onClick={() => setMenuOpen(false)}>About</a>
+            <a href="#publications" className={mobileNavLink} onClick={() => setMenuOpen(false)}>Publications</a>
+            <a href="#profile" className={mobileNavLink} onClick={() => setMenuOpen(false)}>Profile</a>
+            <a href="#team" className={mobileNavLink} onClick={() => setMenuOpen(false)}>Team</a>
+            <a href="#career" className={mobileNavLink} onClick={() => setMenuOpen(false)}>Career opportunities</a>
+            <a href="#gallery" className={mobileNavLink} onClick={() => setMenuOpen(false)}>Gallery</a>
+            <a href="#readings" className={mobileNavLink} onClick={() => setMenuOpen(false)}>General Readings</a>
+            <a href="#contact" className={mobileNavLink} onClick={() => setMenuOpen(false)}>Contact us</a>
+            <a href="#collaborators" className={mobileNavLink} onClick={() => setMenuOpen(false)}>Collaborators</a>
 
           </div>
         </div>
