@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
 
-export default function AddAcademicActivityModal({
-  open,
-  onClose,
-  activity,
-}) {
-  const initialState = {
+const initialState = {
     title: "",
     type: "",
     role: "",
@@ -19,6 +14,12 @@ export default function AddAcademicActivityModal({
     image: "",
     orderIndex: 0,
   };
+export default function AddAcademicActivityModal({
+  open,
+  onClose,
+  activity,
+}) {
+  
 
   const [form, setForm] = useState(initialState);
   const [saving, setSaving] = useState(false);
@@ -259,7 +260,7 @@ export default function AddAcademicActivityModal({
               name="description"
               value={form.description}
               onChange={handleChange}
-              className="admin-input resize-y"
+              className="resize-y admin-input"
             />
 
           </div>
@@ -271,7 +272,7 @@ export default function AddAcademicActivityModal({
             <input
               type="file"
               onChange={uploadImage}
-              className="mt-1 block w-full text-sm text-slate-500 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand hover:file:bg-brand-100"
+              className="block w-full mt-1 text-sm text-slate-500 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand hover:file:bg-brand-100"
             />
 
           </div>
@@ -297,7 +298,7 @@ export default function AddAcademicActivityModal({
           <img
             src={form.image}
             alt=""
-            className="mt-2 h-40 rounded-xl border border-slate-200 object-cover shadow-soft"
+            className="object-cover h-40 mt-2 border rounded-xl border-slate-200 shadow-soft"
           />
 
         )}
