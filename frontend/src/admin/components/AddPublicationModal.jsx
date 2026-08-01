@@ -4,11 +4,11 @@ export default function AddPublicationModal({ open, onClose }) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
-      <div className="w-full max-w-lg p-6 bg-white shadow-xl rounded-xl">
+    <div className="admin-modal-overlay">
+      <div className="w-full max-w-lg rounded-2xl border border-white/10 bg-[#0c1a14] p-6 shadow-elev">
 
         {/* Title */}
-        <h2 className="text-2xl font-semibold text-[#009E66] mb-4">
+        <h2 className="mb-5 text-2xl font-semibold tracking-tight text-brand">
           Add New Publication
         </h2>
 
@@ -16,64 +16,64 @@ export default function AddPublicationModal({ open, onClose }) {
         <div className="space-y-4">
 
           <div>
-            <label className="block text-sm font-medium text-gray-600">Title</label>
+            <label className="admin-label">Title</label>
             <input
               type="text"
-              className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-[#009E66]"
+              className="admin-input"
               placeholder="Enter publication title"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-600">Authors</label>
+            <label className="admin-label">Authors</label>
             <input
               type="text"
-              className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-[#009E66]"
+              className="admin-input"
               placeholder="Author names"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-600">Year</label>
+            <label className="admin-label">Year</label>
             <input
               type="number"
-              className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-[#009E66]"
+              className="admin-input"
               placeholder="Year of publication"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-600">Thumbnail URL</label>
+            <label className="admin-label">Thumbnail URL</label>
             <input
               type="text"
-              className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-[#009E66]"
+              className="admin-input"
               placeholder="Image URL"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-600">Paper Link URL</label>
+            <label className="admin-label">Paper Link URL</label>
             <input
               type="text"
-              className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-[#009E66]"
+              className="admin-input"
               placeholder="PDF or website link"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-600">Citation</label>
+            <label className="admin-label">Citation</label>
             <textarea
               rows={3}
-              className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-[#009E66]"
+              className="admin-input resize-y"
               placeholder="Enter citation"
             ></textarea>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-600">Order Index</label>
+            <label className="admin-label">Order Index</label>
             <input
               type="number"
-              className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-[#009E66]"
+              className="admin-input"
               placeholder="Sorting order"
             />
           </div>
@@ -81,16 +81,16 @@ export default function AddPublicationModal({ open, onClose }) {
         </div>
 
         {/* Buttons */}
-        <div className="flex justify-end gap-3 mt-6">
+        <div className="mt-6 flex justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-gray-800 bg-gray-300 rounded-lg hover:bg-gray-400"
+            className="admin-btn-secondary"
           >
             Cancel
           </button>
 
           <button
-            className="px-4 py-2 bg-[#009E66] text-white rounded-lg hover:bg-[#007a4f]"
+            className="admin-btn-primary"
           >
             Save Publication
           </button>

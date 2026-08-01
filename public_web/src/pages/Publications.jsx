@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
 import { Helmet } from "react-helmet-async";
-import PageAnimation from "../components/PageAnimation";
+import PageAnimation, { ScrollReveal, StaggerContainer, StaggerItem } from "../components/PageAnimation";
 
 export default function UserPublications() {
 
@@ -43,36 +43,25 @@ export default function UserPublications() {
         </Helmet>
 
         {/* Heading */}
-        <h1
-          className="
-          text-2xl sm:text-3xl md:text-4xl
-          font-semibold
-          text-center
-          text-[#009E66]
-          mb-8
-          border-2 border-[#009E66]
-          p-3 sm:p-4
-          w-fit
-          mx-auto
-          mt-3
-          "
-        >
-          Publications
-        </h1>
+        <ScrollReveal>
+          <h1 className="section-title">
+            Publications
+          </h1>
+        </ScrollReveal>
 
         {/* Scrollable Cards */}
-        <div
+        <StaggerContainer
           className="
           grid
           grid-cols-1
           sm:grid-cols-2
           lg:grid-cols-3
           xl:grid-cols-4
-          gap-6 sm:gap-8
+          gap-5 sm:gap-6 lg:gap-8
           px-4 sm:px-6 lg:px-10
-          max-h-[60vh] sm:max-h-[500px]
-          overflow-y-scroll
-          pr-2
+          max-h-none sm:max-h-[520px]
+          overflow-visible sm:overflow-y-auto
+          pr-0 sm:pr-2
           no-scrollbar
           "
           style={{ scrollbarWidth: "none" }}
@@ -86,7 +75,7 @@ export default function UserPublications() {
 
           {pubs.map((p) => (
 
-            <div
+            <StaggerItem
               key={p?._id || Math.random()}
               className="
               group
@@ -115,17 +104,21 @@ export default function UserPublications() {
                   absolute
                   w-full
                   h-full
-                  border-2 border-[#009E66]
+                  border-2 border-[#009E66]/80
                   p-3
                   [backface-visibility:hidden]
                   flex flex-col justify-between
+                  bg-black/40
+                  backdrop-blur-sm
+                  rounded-xl
+                  shadow-soft
                   "
                 >
 
                   <img
                     src={p?.thumbnailUrl || "/defaultPublication.jpg"}
                     alt="thumbnail"
-                    className="object-cover w-full h-44 sm:h-52"
+                    className="object-cover w-full h-44 sm:h-52 rounded-lg"
                   />
 
                   {p?.paperLink ? (
@@ -145,6 +138,7 @@ export default function UserPublications() {
                       hover:bg-[#009E66]
                       hover:text-white
                       text-sm sm:text-base
+                      rounded-lg
                       "
                       onMouseEnter={() => setLockFlip(true)}
                       onMouseLeave={() => setLockFlip(false)}
@@ -171,6 +165,7 @@ export default function UserPublications() {
                   border border-[#009E66]
                   bg-white
                   flex flex-col
+                  rounded-xl
                   "
                 >
 
@@ -243,11 +238,11 @@ export default function UserPublications() {
 
               </div>
 
-            </div>
+            </StaggerItem>
 
           ))}
 
-        </div>
+        </StaggerContainer>
 
       </div>
     </PageAnimation>

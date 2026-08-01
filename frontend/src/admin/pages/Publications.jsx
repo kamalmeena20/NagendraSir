@@ -71,16 +71,16 @@ export default function Publications() {
     loadData();
   };
 
-  if (loading) return <div className="p-6">Loading...</div>;
+  if (loading) return <div className="py-10 text-sm font-medium text-white/50">Loading...</div>;
 
   return (
     <div className="space-y-6">
 
-      <div className="flex justify-between">
-        <h1 className="text-3xl font-semibold text-[#009E66]">Publications</h1>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="admin-page-title">Publications</h1>
 
         <button
-          className="px-4 py-2 bg-[#009E66] text-white rounded"
+          className="admin-btn-primary"
           onClick={() => {
             setEditId(null);
             setForm({
@@ -102,33 +102,33 @@ export default function Publications() {
 
       <div className="space-y-4">
         {list.map((p) => (
-          <div key={p._id} className="p-4 bg-white border rounded shadow">
+          <div key={p._id} className="admin-surface-card">
 
-            <div className="flex gap-6">
+            <div className="flex flex-col gap-5 sm:flex-row">
 
               {/* Thumbnail */}
               <img
                 src={p.thumbnailUrl}
-                className="object-cover border rounded w-28 h-28"
+                className="h-28 w-28 shrink-0 rounded-xl object-cover shadow-soft ring-1 ring-white/15"
                 alt="paper"
               />
 
-              <div className="space-y-2">
+              <div className="min-w-0 space-y-2 text-sm text-white/80">
 
                 {/* Title */}
                 <p>
-                  <b>Title:</b> {p.title}
+                  <b className="font-semibold text-white">Title:</b> {p.title}
                 </p>
 
                 {/* Authors */}
                 <p>
-                  <b>Authors:</b> {p.authors}
+                  <b className="font-semibold text-white">Authors:</b> {p.authors}
                 </p>
 
                 {/* Journal */}
                 {p.journal && (
-                  <p className="pb-2">
-                    <b>Journals:</b> {p.journal}
+                  <p>
+                    <b className="font-semibold text-white">Journals:</b> {p.journal}
                   </p>
                 )}
 
@@ -138,7 +138,7 @@ export default function Publications() {
                     href={p.paperLink}
                     target="_blank"
                     rel="noreferrer"
-                    className="p-1  font-medium text-[#009E66] border border-1 border-[#009E66]"
+                    className="inline-flex rounded-lg border border-brand/40 px-2.5 py-1 text-sm font-medium text-brand transition hover:bg-brand-50"
                   >
                     Paper Link
                   </a>
@@ -147,9 +147,9 @@ export default function Publications() {
               </div>
             </div>
 
-            <div className="flex gap-3 mt-4">
+            <div className="mt-4 flex gap-2">
               <button
-                className="px-3 py-1 text-white bg-blue-600 rounded"
+                className="admin-btn-edit"
                 onClick={() => {
                   setEditId(p._id);
                   setForm(p);
@@ -160,7 +160,7 @@ export default function Publications() {
               </button>
 
               <button
-                className="px-3 py-1 text-white bg-red-600 rounded"
+                className="admin-btn-danger"
                 onClick={() => remove(p._id)}
               >
                 Delete
@@ -174,69 +174,69 @@ export default function Publications() {
 
       {/* MODAL */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/40">
-          <div className="relative p-6 space-y-4 bg-white rounded shadow w-96">
+        <div className="admin-modal-overlay">
+          <div className="admin-modal-panel">
 
             {/* HEADER */}
             <div className="flex items-center justify-between">
 
-              <h2 className="text-xl font-semibold">
+              <h2 className="text-xl font-semibold tracking-tight text-white">
                 {editId ? "Edit Publication" : "Add Publication"}
               </h2>
 
               {/* CLOSE BUTTON */}
               <button
                 onClick={() => setShowModal(false)}
-                className="text-xl font-bold text-gray-500 hover:text-red-500"
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-white/40 transition hover:bg-white/10 hover:text-rose-500"
               >
                 ✕
               </button>
 
             </div>
 
-            <input type="file" onChange={uploadThumb} />
+            <input type="file" onChange={uploadThumb} className="block w-full text-sm text-white/55 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand hover:file:bg-brand-100" />
 
             {form.thumbnailUrl && (
-              <img src={form.thumbnailUrl} className="w-24 h-24 mt-2 border rounded" alt="loading" />
+              <img src={form.thumbnailUrl} className="mt-1 h-24 w-24 rounded-xl object-cover shadow-soft ring-1 ring-white/15" alt="loading" />
             )}
 
             <input
-              className="w-full p-2 border rounded"
+              className="admin-input"
               placeholder="Title"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
             />
 
             <input
-              className="w-full p-2 border rounded"
+              className="admin-input"
               placeholder="Authors"
               value={form.authors}
               onChange={(e) => setForm({ ...form, authors: e.target.value })}
             />
 
             <input
-              className="w-full p-2 border rounded"
+              className="admin-input"
               placeholder="Journal Info"
               value={form.journal}
               onChange={(e) => setForm({ ...form, journal: e.target.value })}
             />
 
             <input
-              className="w-full p-2 border rounded"
+              className="admin-input"
               placeholder="Paper Link"
               value={form.paperLink}
               onChange={(e) => setForm({ ...form, paperLink: e.target.value })}
             />
 
             <button
-              className="px-4 py-2 bg-[#009E66] text-white rounded flex items-center justify-center gap-2 disabled:opacity-60"
+              className="admin-btn-primary w-full"
               onClick={save}
               disabled={uploading}
             >
 
               {uploading ? (
                 <>
-                  <span className="w-4 h-4 border-2 border-white rounded-full border-t-transparent animate-spin"></span>
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
                   Uploading...
                 </>
               ) : (

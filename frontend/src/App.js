@@ -18,6 +18,7 @@ import About from "./admin/pages/About";
 import Career from "./admin/pages/Career";
 //import Reading from "./admin/pages/Readings";
 import GeneralReadings from "./admin/pages/Readings";
+import AcademicActivities from "./admin/pages/AcademicActivities";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="career" element={<Career />} />
           <Route path="readings" element={<GeneralReadings />} />
+          <Route path="/admin/academic-activities" element={<AcademicActivities />} />
         </Route>
 
       </Routes>

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import api from "../api/api";
 import { Helmet } from "react-helmet-async";
-import PageAnimation from "../components/PageAnimation";
+import PageAnimation, { FadeInLeft, FadeInRight, ScrollReveal } from "../components/PageAnimation";
 
 export default function About() {
-
   const [data, setData] = useState(null);
 
   const loadData = async () => {
@@ -22,7 +22,7 @@ export default function About() {
 
   return (
     <PageAnimation>
-      <div className="min-h-screen">
+      <div className="w-full">
 
         <Helmet>
           <title>About | Dr Nagendra Kumar</title>
@@ -39,63 +39,68 @@ export default function About() {
             href="https://nagendra-sir-xkun.vercel.app/#about"
           />
         </Helmet>
-        <div className="flex justify-center mt-10 mb-20">
-          <h1 className="text-3xl md:text-4xl font-semibold text-[#009E66] py-2 px-10 border-2 border-[#009e66]">
-            About
-          </h1>
-        </div>
 
-        {/* IMAGE */}
-        <div className="flex justify-center lg:ml-[550px] md:justify-start mt-8 md:mt-10 md:ml-[280px] w-fit">
-
-          {data?.image ? (
-            <img
-              src={data.image}
-              alt="Profile"
-              className="object-cover rounded-full shadow-lg w-28 h-28 md:w-40 md:h-40"
-            />
-          ) : (
-            <div className="flex items-center justify-center text-sm text-gray-400 border rounded-full w-28 h-28 md:w-40 md:h-40">
-              No image available
-            </div>
-          )}
-
-        </div>
-
-        {/* MAIN ROW */}
-        <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-8 md:gap-10 px-4 sm:px-6 md:px-20 mt-6 md:mt-[-40px]">
-
-          {/* LEFT */}
-          <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:gap-8">
-
-            <h1 className="text-[#009e66] font-semibold text-[60px] sm:text-[80px] md:text-[120px] leading-none">
+        {/* Heading */}
+        <ScrollReveal>
+          <div className="flex justify-center mt-4 mb-8 sm:mt-8 sm:mb-12 md:mb-16">
+            <h1 className="section-title mt-0 mb-0">
               About
             </h1>
-
-            <div className="w-[200px] sm:w-[260px] md:w-auto border-t-[3px] border-[#009e66] md:h-[270px] md:border-t-0 md:border-l-[3px]"></div>
-
           </div>
+        </ScrollReveal>
 
-          {/* RIGHT */}
-          <div className="flex flex-col justify-center max-w-3xl text-left">
+        {/* Main Section */}
+        <div className="flex flex-col items-center justify-center gap-8 px-4 sm:gap-10 sm:px-6 lg:flex-row lg:items-start lg:gap-12 md:px-12 xl:px-20">
 
-            {data?.instituteName ? (
-              <h2 className="text-[#009e66] font-semibold text-xl md:text-2xl mb-4">
-                {data.instituteName}
-              </h2>
-            ) : (
-              <p className="mb-4 text-gray-400">no institute name available</p>
-            )}
+          {/* Left */}
+          <FadeInLeft>
+            <div className="flex items-center gap-4 sm:gap-8">
 
-            {data?.description ? (
-              <p className="text-[16px] md:text-lg leading-relaxed text-white">
-                {data.description}
+              <h1 className="font-sans font-semibold text-[#009e66] text-[36px] sm:text-[52px] md:text-[72px] lg:text-[90px] xl:text-[100px] leading-none tracking-[0.04em]">
+                About
+              </h1>
+
+              <div className="hidden lg:block h-[300px] xl:h-[430px] border-l-[3px] border-[#009e66]/80"></div>
+
+            </div>
+          </FadeInLeft>
+
+          {/* Right */}
+          <FadeInRight className="w-full max-w-4xl">
+            <div className="w-full glass-panel p-4 sm:p-6 md:p-8">
+
+              {/* Image + Institute */}
+              <div className="flex flex-col items-center gap-5 mb-6 sm:mb-8 sm:flex-row sm:items-center sm:gap-6">
+
+                {data?.image ? (
+                  <motion.img
+                    src={data.image}
+                    alt="Profile"
+                    className="object-cover rounded-full shadow-xl w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 ring-2 ring-brand/50 shrink-0"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                  />
+                ) : (
+                  <div className="flex items-center justify-center text-gray-400 border rounded-full border-white/20 w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40">
+                    No Image
+                  </div>
+                )}
+
+                <div className="text-center sm:text-left">
+                  <h2 className="text-[#009e66] text-xl sm:text-2xl md:text-3xl tracking-tight break-words">
+                    {data?.instituteName}
+                  </h2>
+                </div>
+
+              </div>
+
+              {/* Description */}
+              <p className="text-white/90 text-[15px] sm:text-[16px] md:text-lg leading-7 sm:leading-8 md:leading-9 tracking-wide whitespace-pre-wrap break-words">
+                {data?.description}
               </p>
-            ) : (
-              <p className="text-gray-400">no description available</p>
-            )}
 
-          </div>
+            </div>
+          </FadeInRight>
 
         </div>
 

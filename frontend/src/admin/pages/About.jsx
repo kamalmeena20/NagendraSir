@@ -65,16 +65,17 @@ export default function About() {
     setSaving(false);
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="py-10 text-sm font-medium text-white/50">Loading...</div>;
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-semibold text-[#009E66]">
+    <div className="mx-auto max-w-3xl space-y-6">
+      <h1 className="admin-page-title">
         About Page Content
       </h1>
 
+      <div className="admin-card space-y-5">
       <input
-        className="w-full p-2 border rounded"
+        className="admin-input"
         placeholder="Heading or Title"
         value={data.instituteName}
         onChange={(e) =>
@@ -83,7 +84,7 @@ export default function About() {
       />
 
       <textarea
-        className="w-full h-32 p-2 border rounded"
+        className="admin-input h-32 resize-y"
         placeholder="About Description"
         value={data.description}
         onChange={(e) =>
@@ -91,23 +92,26 @@ export default function About() {
         }
       />
 
-      <label className="block font-semibold">Image</label>
-      <input type="file" onChange={uploadImage} />
+      <div>
+        <label className="admin-label">Image</label>
+        <input type="file" onChange={uploadImage} className="block w-full text-sm text-white/55 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand hover:file:bg-brand-100" />
 
-      {data.image && (
-        <img
-          src={data.image}
-          className="object-cover w-40 h-40 mt-2"
-          alt="about"
-        />
-      )}
+        {data.image && (
+          <img
+            src={data.image}
+            className="mt-3 h-40 w-40 rounded-xl object-cover shadow-soft ring-1 ring-white/15"
+            alt="about"
+          />
+        )}
+      </div>
 
       <button
         onClick={saveData}
-        className="px-4 py-2 bg-[#009E66] text-white rounded"
+        className="admin-btn-primary"
       >
         {saving ? "Saving..." : "Save"}
       </button>
+      </div>
     </div>
   );
 }

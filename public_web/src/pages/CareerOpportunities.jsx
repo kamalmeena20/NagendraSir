@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
 import { Helmet } from "react-helmet-async";
-import PageAnimation from '../components/PageAnimation'
+import PageAnimation, { ScrollReveal, StaggerContainer, StaggerItem } from '../components/PageAnimation'
 
 export default function CareerPublic() {
   const [list, setList] = useState([]);
@@ -50,9 +50,11 @@ export default function CareerPublic() {
         <div className="flex flex-col items-center w-full max-w-6xl px-4 py-10 mx-auto">
 
           {/* PAGE TITLE */}
-          <h1 className="px-6 py-2 mb-10 text-2xl sm:text-3xl md:text-4xl font-bold text-center text-[#009e66] border-2 border-[#009e66]">
-            Career Opportunities
-          </h1>
+          <ScrollReveal>
+            <h1 className="section-title mb-10 mt-0">
+              Career Opportunities
+            </h1>
+          </ScrollReveal>
 
           <div className="w-full space-y-10">
 
@@ -68,26 +70,30 @@ export default function CareerPublic() {
                 if (catItems.length === 0) return null;
 
                 return (
-                  <div key={cat.value} className="space-y-4">
+                  <ScrollReveal key={cat.value}>
+                    <div className="space-y-4 glass-panel p-5 sm:p-6">
 
-                    <div className="inline-block px-4 py-2 text-base sm:text-lg font-bold text-[#009e66] border border-[#009e66]">
-                      {cat.label}
-                    </div>
-
-                    {catItems.map((item) => (
-                      <div key={item._id} className="space-y-2">
-
-                        <h2 className="inline-block px-3 py-1 text-sm font-semibold text-white bg-red-600 sm:text-base">
-                          {item?.title || "No title available"}
-                        </h2>
-
-                        <p className="text-sm leading-7 text-white sm:text-base">
-                          {item?.description || "No description available"}
-                        </p>
-
+                      <div className="inline-block px-4 py-2 text-base sm:text-lg font-bold text-[#009e66] border border-[#009e66]/80 rounded-lg bg-brand/10">
+                        {cat.label}
                       </div>
-                    ))}
-                  </div>
+
+                      <StaggerContainer className="space-y-4">
+                        {catItems.map((item) => (
+                          <StaggerItem key={item._id} className="space-y-2">
+
+                            <h2 className="inline-block max-w-full px-4 py-2 text-sm font-semibold leading-relaxed tracking-wide text-white break-words bg-brand sm:text-base rounded-lg shadow-glow font-sans">
+                              {item?.title || "No title available"}
+                            </h2>
+
+                            <p className="text-sm leading-7 tracking-wide text-white/90 sm:text-base sm:leading-8">
+                              {item?.description || "No description available"}
+                            </p>
+
+                          </StaggerItem>
+                        ))}
+                      </StaggerContainer>
+                    </div>
+                  </ScrollReveal>
                 );
               })
 
@@ -95,11 +101,13 @@ export default function CareerPublic() {
 
           </div>
           {/* CONTACT */}
-          <div className="mt-16 text-sm text-center text-white sm:text-base">
-            <p className="font-semibold">
-              ✉ nagendra_kumar@iiitvadodara.ac.in
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="mt-16 text-sm text-center text-white sm:text-base">
+              <p className="font-semibold text-brand-400">
+                ✉ nagendra_kumar@iiitvadodara.ac.in
+              </p>
+            </div>
+          </ScrollReveal>
 
         </div>
       </PageAnimation>

@@ -79,12 +79,12 @@ export default function Gallery() {
     loadImages();
   };
 
-  if (loading) return <div className="p-6">Loading...</div>;
+  if (loading) return <div className="py-10 text-sm font-medium text-white/50">Loading...</div>;
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between">
-        <h1 className="text-3xl font-semibold text-[#009E66]">Gallery</h1>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="admin-page-title">Gallery</h1>
 
         <button
           onClick={() => {
@@ -92,45 +92,45 @@ export default function Gallery() {
             setEditId(null);
             setShowModal(true);
           }}
-          className="px-4 py-2 bg-[#009E66] text-white rounded-lg hover:bg-[#007a4f]"
+          className="admin-btn-primary"
         >
           + Add Image
         </button>
       </div>
 
       {/* GRID */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
         {images.map((img) => (
-          <div key={img._id} className="p-3 bg-white rounded-lg shadow">
+          <div key={img._id} className="overflow-hidden rounded-2xl border border-white/10 bg-black/35 p-3 shadow-soft backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-elev">
             <img
               alt=""
               src={`${img.imageUrl}?f_auto,q_auto`}
-              className="object-cover w-full h-48 rounded"
+              className="h-48 w-full rounded-xl object-cover"
             />
 
-            <h2 className="mt-2 text-lg font-semibold">{img.title}</h2>
+            <h2 className="mt-3 px-1 text-base font-semibold text-white">{img.title}</h2>
 
             {img.event && (
-              <p className="text-sm text-gray-600">Event: {img.event}</p>
+              <p className="px-1 text-sm text-white/55">Event: {img.event}</p>
             )}
 
-            <p className="text-sm text-gray-500">Order: {img.orderIndex}</p>
+            <p className="px-1 text-xs text-white/40">Order: {img.orderIndex}</p>
 
-            <div className="flex gap-3 mt-3">
+            <div className="mt-3 flex gap-2 px-1 pb-1">
               <button
                 onClick={() => {
                   setEditId(img._id);
                   setForm(img);
                   setShowModal(true);
                 }}
-                className="px-3 py-1 text-white bg-blue-600 rounded"
+                className="admin-btn-edit"
               >
                 Edit
               </button>
 
               <button
                 onClick={() => deleteImage(img._id)}
-                className="px-3 py-1 text-white bg-red-600 rounded"
+                className="admin-btn-danger"
               >
                 Delete
               </button>
@@ -141,20 +141,20 @@ export default function Gallery() {
 
       {/* MODAL */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/40">
-          <div className="relative p-6 space-y-4 bg-white rounded-lg shadow w-96">
+        <div className="admin-modal-overlay">
+          <div className="admin-modal-panel">
 
             {/* HEADER */}
             <div className="flex items-center justify-between">
 
-              <h2 className="text-xl font-semibold text-[#009E66]">
+              <h2 className="text-xl font-semibold tracking-tight text-brand">
                 {editId ? "Edit Image" : "Add Image"}
               </h2>
 
               {/* CLOSE BUTTON */}
               <button
                 onClick={() => setShowModal(false)}
-                className="text-xl font-bold text-gray-500 hover:text-red-500"
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-white/40 transition hover:bg-white/10 hover:text-rose-500"
               >
                 ✕
               </button>
@@ -164,26 +164,26 @@ export default function Gallery() {
             <input
               type="file"
               onChange={uploadGalleryImage}
-              className="w-full p-2 border rounded"
+              className="block w-full text-sm text-white/55 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand hover:file:bg-brand-100"
             />
 
             {form.imageUrl && (
               <img
                 alt=""
                 src={form.imageUrl}
-                className="object-cover w-full h-40 border rounded"
+                className="h-40 w-full rounded-xl object-cover shadow-soft ring-1 ring-white/15"
               />
             )}
 
             <input
-              className="w-full p-2 border rounded"
+              className="admin-input"
               placeholder="Title"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
             />
 
             <input
-              className="w-full p-2 border rounded"
+              className="admin-input"
               placeholder="Event Name"
               value={form.event}
               onChange={(e) => setForm({ ...form, event: e.target.value })}
@@ -191,7 +191,7 @@ export default function Gallery() {
 
             <input
               type="number"
-              className="w-full p-2 border rounded"
+              className="admin-input"
               placeholder="Order Index"
               value={form.orderIndex}
               onChange={(e) =>
@@ -202,12 +202,12 @@ export default function Gallery() {
             <button
               onClick={saveImage}
               disabled={uploading}
-              className="px-4 py-2 bg-[#009E66] text-white rounded flex items-center justify-center gap-2 disabled:opacity-60"
+              className="admin-btn-primary w-full"
             >
 
               {uploading ? (
                 <>
-                  <span className="w-4 h-4 border-2 border-white rounded-full border-t-transparent animate-spin"></span>
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
                   Uploading...
                 </>
               ) : (

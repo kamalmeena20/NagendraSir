@@ -2,18 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    background-color: #04140f;
+    color: #f8fafc;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
+  }
+
+  ::selection {
+    background-color: rgba(0, 158, 102, 0.28);
+    color: #fff;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  .admin-page-title {
+    @apply text-2xl font-semibold tracking-tight text-white sm:text-3xl;
+  }
+
+  .admin-card {
+    @apply rounded-2xl border border-white/10 bg-black/35 p-5 shadow-soft backdrop-blur-md sm:p-6;
+  }
+
+  .admin-input {
+    @apply w-full rounded-xl border border-white/15 bg-white/5 px-3.5 py-2.5 text-sm text-white placeholder:text-white/40 transition duration-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30;
+  }
+
+  .admin-label {
+    @apply mb-1.5 block text-sm font-medium text-white/70;
+  }
+
+  .admin-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:bg-brand-600 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:ring-offset-2 focus:ring-offset-[#04140f] disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .admin-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-sm font-medium text-white/90 transition duration-200 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-[#04140f];
+  }
+
+  .admin-btn-edit {
+    @apply inline-flex items-center justify-center rounded-lg bg-sky-500/15 px-3 py-1.5 text-sm font-medium text-sky-300 transition duration-200 hover:bg-sky-500/25;
+  }
+
+  .admin-btn-danger {
+    @apply inline-flex items-center justify-center rounded-lg bg-rose-500/15 px-3 py-1.5 text-sm font-medium text-rose-300 transition duration-200 hover:bg-rose-500/25;
+  }
+
+  .admin-modal-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm;
+  }
+
+  .admin-modal-panel {
+    @apply relative w-full max-w-md space-y-4 rounded-2xl border border-white/10 bg-[#0c1a14] p-6 shadow-elev;
+  }
+
+  .admin-surface-card {
+    @apply rounded-2xl border border-white/10 bg-black/35 p-5 shadow-soft backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-elev;
+  }
 }
-
-

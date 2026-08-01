@@ -24,8 +24,13 @@ exports.getHome = async (req, res) => {
     let home = await Home.findOne();
 
     if (!home) {
+      // home = {
+      //   title: "",
+      //   description: "",
+      //   heroImage: "",
+      //   secondImage: ""
+      // };
       home = {
-        title: "",
         description: "",
         heroImage: "",
         secondImage: ""

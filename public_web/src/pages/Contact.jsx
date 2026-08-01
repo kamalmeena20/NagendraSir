@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import api from "../api/api";
 import mapimage from "../assets/mapimage.jpg";
 import { Helmet } from "react-helmet-async";
-import PageAnimation from "../components/PageAnimation";
+import PageAnimation, { ScrollReveal } from "../components/PageAnimation";
 
 export default function Contact() {
   const mainColor = "#009E66";
@@ -44,120 +45,130 @@ export default function Contact() {
         </Helmet>
 
         {/* PAGE TITLE */}
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mt-10 mb-10 py-2 px-6 sm:px-10 border-2 border-[#009e66] text-[#009E66]">
-          Contact
-        </h1>
+        <ScrollReveal>
+          <h1 className="section-title">
+            Contact
+          </h1>
+        </ScrollReveal>
 
         <div className="w-full max-w-6xl px-4 sm:px-6">
 
           {/* TOP SECTION */}
-          <div className="flex flex-col items-center gap-8 md:items-start md:gap-10 md:flex-row">
+          <ScrollReveal>
+            <div className="flex flex-col items-center gap-8 p-6 glass-panel sm:p-8 md:items-start md:gap-10 md:flex-row">
 
-            {/* PROFILE IMAGE */}
-            <div className="flex-shrink-0">
-              <div
-                className="w-32 h-32 overflow-hidden border-2 rounded-full sm:w-40 sm:h-40"
-                style={{ borderColor: mainColor }}
-              >
-                <img
-                  src={contact?.photoUrl || "/defaultProfile.png"}
-                  alt="profile"
-                  className="object-cover w-full h-full"
-                />
+              {/* PROFILE IMAGE */}
+              <div className="flex-shrink-0">
+                <motion.div
+                  className="w-32 h-32 overflow-hidden border-2 rounded-full sm:w-40 sm:h-40 shadow-glow"
+                  style={{ borderColor: mainColor }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                >
+                  <img
+                    src={contact?.photoUrl || "/defaultProfile.png"}
+                    alt="profile"
+                    className="object-cover w-full h-full"
+                  />
+                </motion.div>
               </div>
-            </div>
 
-            {/* TEXT SECTION */}
-            <div className="flex gap-4">
+              {/* TEXT SECTION */}
+              <div className="flex gap-4">
 
-              {/* VERTICAL LINE */}
-              <div
-                className="hidden md:block w-[2px] h-60 rounded-full"
-                style={{ backgroundColor: mainColor }}
-              ></div>
+                {/* VERTICAL LINE */}
+                <div
+                  className="hidden md:block w-[2px] h-60 rounded-full"
+                  style={{ backgroundColor: mainColor }}
+                ></div>
 
-              <div className="flex flex-col items-start text-left">
+                <div className="flex flex-col items-start text-left">
 
-                {/* NAME */}
-                <h2 className="text-xl font-bold sm:text-2xl">
-                  {contact?.name || (
-                    <span className="text-base font-normal text-gray-400">
-                      Name not available
-                    </span>
-                  )}
-                </h2>
+                  {/* NAME */}
+                  <h2 className="text-xl font-bold sm:text-2xl tracking-tight">
+                    {contact?.name || (
+                      <span className="text-base font-normal text-gray-400">
+                        Name not available
+                      </span>
+                    )}
+                  </h2>
 
-                {/* PROFESSION */}
-                <p className="text-base font-semibold sm:text-lg">
-                  {contact?.profession || (
-                    <span className="text-sm font-normal text-gray-400">
-                      Profession not available
-                    </span>
-                  )}
-                </p>
+                  {/* PROFESSION */}
+                  <p className="text-base font-semibold sm:text-lg text-white/90">
+                    {contact?.profession || (
+                      <span className="text-sm font-normal text-gray-400">
+                        Profession not available
+                      </span>
+                    )}
+                  </p>
 
-                {/* DEPARTMENT */}
-                <p className="text-base font-semibold sm:text-lg">
-                  {contact?.department || (
-                    <span className="text-sm font-normal text-gray-400">
-                      Department not available
-                    </span>
-                  )}
-                </p>
+                  {/* DEPARTMENT */}
+                  <p className="text-base font-semibold sm:text-lg text-white/90">
+                    {contact?.department || (
+                      <span className="text-sm font-normal text-gray-400">
+                        Department not available
+                      </span>
+                    )}
+                  </p>
 
-                {/* EMAIL */}
-                <p className="mt-2 font-semibold">
-                  Email:
-                  {contact?.emailPrimary ? (
+                  {/* EMAIL */}
+                  <p className="mt-2 font-semibold">
+                    Email:
+                    {contact?.emailPrimary ? (
+                      <a
+                        href={`mailto:${contact.emailPrimary}`}
+                        className="ml-2 text-brand-400 underline underline-offset-2 transition hover:text-brand"
+                      >
+                        {contact.emailPrimary}
+                      </a>
+                    ) : (
+                      <span className="ml-2 text-sm text-gray-400">
+                        not available
+                      </span>
+                    )}
+                  </p>
+
+                  {contact?.emailSecondary && (
                     <a
-                      href={`mailto:${contact.emailPrimary}`}
-                      className="ml-2 text-blue-500 underline"
+                      href={`mailto:${contact.emailSecondary}`}
+                      className="font-semibold text-brand-400 underline underline-offset-2 transition hover:text-brand"
                     >
-                      {contact.emailPrimary}
+                      {contact.emailSecondary}
                     </a>
-                  ) : (
-                    <span className="ml-2 text-sm text-gray-400">
-                      not available
-                    </span>
                   )}
-                </p>
 
-                {contact?.emailSecondary && (
-                  <a
-                    href={`mailto:${contact.emailSecondary}`}
-                    className="font-semibold text-blue-500 underline"
-                  >
-                    {contact.emailSecondary}
-                  </a>
-                )}
+                  {/* ADDRESS */}
+                  <p className="mt-6 text-base font-semibold leading-relaxed sm:text-lg text-white/90">
+                    {contact?.addressLine1 ? (
+                      <>
+                        {contact.addressLine1} <br />
+                        {contact.city || ""} {contact.state || ""}{" "}
+                        {contact.pincode ? `– ${contact.pincode}` : ""}
+                      </>
+                    ) : (
+                      <span className="text-sm font-normal text-gray-400">
+                        Address not available
+                      </span>
+                    )}
+                  </p>
 
-                {/* ADDRESS */}
-                <p className="mt-6 text-base font-semibold leading-relaxed sm:text-lg">
-                  {contact?.addressLine1 ? (
-                    <>
-                      {contact.addressLine1} <br />
-                      {contact.city || ""} {contact.state || ""}{" "}
-                      {contact.pincode ? `– ${contact.pincode}` : ""}
-                    </>
-                  ) : (
-                    <span className="text-sm font-normal text-gray-400">
-                      Address not available
-                    </span>
-                  )}
-                </p>
-
+                </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* MAP IMAGE */}
-          <div className="w-full mt-10">
-            <img
-              src={mapimage}
-              className="w-full rounded shadow-lg"
-              alt="Map Location"
-            />
-          </div>
+          <ScrollReveal delay={0.12}>
+            <div className="w-full mt-10 overflow-hidden rounded-2xl border border-white/10 shadow-soft">
+              <motion.img
+                src={mapimage}
+                className="w-full"
+                alt="Map Location"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.5 }}
+              />
+            </div>
+          </ScrollReveal>
 
         </div>
       </div>

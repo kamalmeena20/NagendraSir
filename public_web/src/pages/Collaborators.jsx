@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import api from "../api/api";
 import { Helmet } from "react-helmet-async";
-import PageAnimation from "../components/PageAnimation";
+import PageAnimation, { ScrollReveal, StaggerContainer, StaggerItem } from "../components/PageAnimation";
 
 export default function Collaborators() {
   const [list, setList] = useState([]);
@@ -41,12 +42,14 @@ export default function Collaborators() {
         </Helmet>
 
         {/* PAGE TITLE */}
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mt-10 mb-10 py-2 px-6 border-2 border-[#009E66] text-[#009E66]">
-          Collaborators
-        </h1>
+        <ScrollReveal>
+          <h1 className="section-title">
+            Collaborators
+          </h1>
+        </ScrollReveal>
 
         {/* CONTENT */}
-        <div className="w-full max-w-4xl px-4 pb-10 space-y-12">
+        <StaggerContainer className="w-full max-w-4xl px-4 pb-10 space-y-8">
 
           {list.length === 0 && (
             <div className="py-10 text-center text-gray-400">
@@ -55,22 +58,24 @@ export default function Collaborators() {
           )}
 
           {list.map((inst) => (
-            <div key={inst?._id || Math.random()} className="space-y-6">
+            <StaggerItem key={inst?._id || Math.random()} className="space-y-6 p-5 sm:p-6 glass-panel hover:border-brand/40 transition duration-300">
 
               {/* TOP SECTION */}
               <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start">
 
                 {/* LOGO */}
-                <img
+                <motion.img
                   src={inst?.logoUrl || "/defaultLogo.png"}
                   alt="logo"
                   className="object-contain w-20 h-20 sm:w-24 sm:h-24"
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
                 />
 
                 {/* INSTITUTE NAMES */}
                 <div className="text-center sm:text-left">
 
-                  <h2 className="text-lg font-semibold sm:text-xl">
+                  <h2 className="text-lg font-semibold sm:text-xl tracking-tight">
                     {inst?.hindiInstituteName || "Institute name not available"}
                   </h2>
 
@@ -82,7 +87,7 @@ export default function Collaborators() {
               </div>
 
               {/* COLLABORATORS TITLE */}
-              <h3 className="text-base font-semibold sm:text-lg">
+              <h3 className="text-base font-semibold sm:text-lg text-brand-400">
                 Collaborators :
               </h3>
 
@@ -99,10 +104,10 @@ export default function Collaborators() {
                 </p>
               )}
 
-            </div>
+            </StaggerItem>
           ))}
 
-        </div>
+        </StaggerContainer>
       </div>
     </PageAnimation>
   );

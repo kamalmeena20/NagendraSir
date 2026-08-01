@@ -18,39 +18,53 @@ export default function AdminSignup() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen pt-20 bg-white">
-      <div className="bg-[#009e66] text-white px-20 py-4 rounded-md text-4xl font-semibold">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(0,158,102,0.25),transparent_55%),#04140f] px-4 py-12">
+      <div className="mb-8 rounded-2xl bg-brand px-10 py-3.5 text-3xl font-semibold tracking-tight text-white shadow-elev sm:px-16 sm:text-4xl">
         Sign up !
       </div>
 
-      <div className="w-[80%] md:w-[60%] lg:w-[45%] bg-[#009e66] text-white mt-10 p-10 rounded-[40px] shadow-lg">
+      <div className="w-full max-w-md rounded-[2rem] bg-gradient-to-br from-brand to-brand-700 p-8 text-white shadow-elev sm:p-10 md:max-w-lg">
         <Logo />
 
-        <form onSubmit={handleSignup} className="mt-6">
-          <label className="block mb-1 text-lg text-white">Username</label>
-          <input
-            type="text"
-            placeholder="Enter your username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-className="w-full px-4 py-3 mb-6 text-white placeholder-white placeholder-opacity-50 bg-transparent border border-white rounded-md focus:outline-none"/>
+        <form onSubmit={handleSignup} className="mt-2 space-y-5">
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-white/90">
+              Username
+            </label>
+            <input
+              type="text"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full rounded-xl border border-white/40 bg-white/10 px-4 py-3 text-white placeholder-white/50 backdrop-blur-sm transition duration-200 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/30"
+            />
+          </div>
 
-          <label className="block mb-1 text-lg text-white">Password</label>
-          <input
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-className="w-full px-4 py-3 mb-6 text-white placeholder-white placeholder-opacity-50 bg-transparent border border-white rounded-md focus:outline-none"          />
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-white/90">
+              Password
+            </label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-xl border border-white/40 bg-white/10 px-4 py-3 text-white placeholder-white/50 backdrop-blur-sm transition duration-200 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/30"
+            />
+          </div>
 
           <button
             type="submit"
-            className="w-full py-3 font-semibold text-green-700 transition-all bg-white rounded-md hover:bg-gray-200"
+            className="w-full rounded-xl bg-white py-3.5 font-semibold text-brand shadow-sm transition duration-200 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-brand"
           >
             Sign Up
           </button>
 
-          {message && <p className="mt-4 text-center">{message}</p>}
+          {message && (
+            <p className="mt-2 text-center text-sm font-medium text-white/95">
+              {message}
+            </p>
+          )}
         </form>
       </div>
     </div>

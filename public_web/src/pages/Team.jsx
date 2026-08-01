@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import api from "../api/api";
 import { Helmet } from "react-helmet-async";
-import PageAnimation from "../components/PageAnimation";
+import PageAnimation, { ScrollReveal, StaggerContainer, StaggerItem } from "../components/PageAnimation";
 
 export default function Team() {
 
@@ -40,19 +41,21 @@ export default function Team() {
         </Helmet>
 
         {/* TITLE */}
-        <h1 className="text-3xl md:text-4xl font-semibold text-center text-[#009E66] mt-10 mb-12 py-2 px-8 md:px-10 border-2 border-[#009e66] w-fit">
-          Team
-        </h1>
+        <ScrollReveal>
+          <h1 className="section-title">
+            Team
+          </h1>
+        </ScrollReveal>
 
         <div
           className="w-full px-4 overflow-y-auto max-w-7xl"
           style={{
-            maxHeight: "600px",
+            maxHeight: "none",
             scrollbarWidth: "none"
           }}
         >
 
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+          <StaggerContainer className="grid grid-cols-1 gap-8 sm:gap-10 md:gap-12 md:grid-cols-2 pb-4">
 
             {members.length === 0 && (
               <div className="py-20 text-center text-gray-400 col-span-full">
@@ -62,24 +65,26 @@ export default function Team() {
 
             {members.map((m) => (
 
-              <div
+              <StaggerItem
                 key={m?._id || Math.random()}
-                className="flex flex-col items-start gap-6 sm:flex-row"
+                className="flex flex-col items-start gap-6 p-5 transition duration-300 border border-transparent sm:flex-row glass-panel hover:border-brand/40"
               >
 
                 {/* IMAGE */}
                 <div className="flex-shrink-0">
 
-                  <div
-                    className="w-32 h-32 border-2 rounded-full md:w-40 md:h-40"
+                  <motion.div
+                    className="w-32 h-32 border-2 rounded-full overflow-hidden md:w-40 md:h-40 shadow-glow"
                     style={{ borderColor: mainColor }}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 18 }}
                   >
                     <img
                       src={m?.imageUrl || "/defaultProfile.png"}
                       alt={m?.name || "team member"}
                       className="object-cover w-full h-full rounded-full"
                     />
-                  </div>
+                  </motion.div>
 
                 </div>
 
@@ -93,7 +98,7 @@ export default function Team() {
 
                   <div className="flex flex-col">
 
-                    <h2 className="text-lg font-bold md:text-xl">
+                    <h2 className="text-lg font-bold md:text-xl tracking-tight">
                       {m?.name || (
                         <span className="text-sm text-gray-400">
                           Name not available
@@ -101,7 +106,7 @@ export default function Team() {
                       )}
                     </h2>
 
-                    <p className="text-base font-semibold md:text-lg">
+                    <p className="text-base font-semibold md:text-lg text-brand-400">
                       {m?.role || (
                         <span className="text-sm text-gray-400">
                           Role not available
@@ -109,7 +114,7 @@ export default function Team() {
                       )}
                     </p>
 
-                    <p className="text-base md:text-lg">
+                    <p className="text-base md:text-lg text-white/80">
                       {m?.department || (
                         <span className="text-sm text-gray-400">
                           Department not available
@@ -122,7 +127,7 @@ export default function Team() {
                       {m?.email ? (
                         <a
                           href={`mailto:${m.email}`}
-                          className="text-blue-500 underline"
+                          className="text-brand-400 underline underline-offset-2 transition hover:text-brand"
                         >
                           {m.email}
                         </a>
@@ -138,11 +143,11 @@ export default function Team() {
 
                 </div>
 
-              </div>
+              </StaggerItem>
 
             ))}
 
-          </div>
+          </StaggerContainer>
 
         </div>
 

@@ -41,49 +41,51 @@ export default function GeneralReadings() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-semibold text-[#009E66]">General Readings</h1>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="admin-page-title">General Readings</h1>
 
-      <button
-        onClick={() => {
-          setEditingId(null);
-          setForm({ title: "", description: "", link: "" });
-          setModalOpen(true);
-        }}
-        className="px-4 py-2 bg-[#009E66] text-white rounded"
-      >
-        + Add Reading
-      </button>
+        <button
+          onClick={() => {
+            setEditingId(null);
+            setForm({ title: "", description: "", link: "" });
+            setModalOpen(true);
+          }}
+          className="admin-btn-primary"
+        >
+          + Add Reading
+        </button>
+      </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         {list.map((item, index) => (
-          <div key={item._id} className="p-4 bg-white border rounded shadow">
-            <h3 className="font-bold">{index + 1}. {item.title}</h3>
-            <p className="mt-2">{item.description}</p>
+          <div key={item._id} className="admin-surface-card">
+            <h3 className="font-semibold text-white">{index + 1}. {item.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-white/70">{item.description}</p>
 
             <a
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-3 text-blue-600 underline"
+              className="mt-3 inline-block text-sm font-medium text-brand underline-offset-2 transition hover:underline"
             >
               {item.link}
             </a>
 
-            <div className="flex gap-3 mt-4">
+            <div className="mt-4 flex gap-2">
               <button
                 onClick={() => {
                   setEditingId(item._id);
                   setForm(item);
                   setModalOpen(true);
                 }}
-                className="px-3 py-1 text-white bg-blue-600 rounded"
+                className="admin-btn-edit"
               >
                 Edit
               </button>
 
               <button
                 onClick={() => del(item._id)}
-                className="px-3 py-1 text-white bg-red-600 rounded"
+                className="admin-btn-danger"
               >
                 Delete
               </button>
@@ -94,16 +96,16 @@ export default function GeneralReadings() {
 
       {/* MODAL */}
       {modalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center p-4 bg-black/40">
-          <div className="w-full max-w-md p-6 space-y-3 bg-white rounded shadow">
-            <h2 className="text-xl font-semibold">
+        <div className="admin-modal-overlay">
+          <div className="admin-modal-panel">
+            <h2 className="text-xl font-semibold tracking-tight text-white">
               {editingId ? "Edit Reading" : "Add Reading"}
             </h2>
 
             <input
               type="text"
               placeholder="Title"
-              className="w-full p-2 border rounded"
+              className="admin-input"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
             />
@@ -111,7 +113,7 @@ export default function GeneralReadings() {
             <textarea
               placeholder="Description"
               rows={4}
-              className="w-full p-2 border rounded"
+              className="admin-input resize-y"
               value={form.description}
               onChange={(e) =>
                 setForm({ ...form, description: e.target.value })
@@ -121,22 +123,22 @@ export default function GeneralReadings() {
             <input
               type="text"
               placeholder="Link URL"
-              className="w-full p-2 border rounded"
+              className="admin-input"
               value={form.link}
               onChange={(e) => setForm({ ...form, link: e.target.value })}
             />
 
-            <div className="flex justify-between mt-4">
+            <div className="flex justify-between gap-3 pt-2">
               <button
                 onClick={() => setModalOpen(false)}
-                className="px-4 py-2 bg-gray-300 rounded"
+                className="admin-btn-secondary"
               >
                 Cancel
               </button>
 
               <button
                 onClick={save}
-                className="px-4 py-2 text-white bg-green-600 rounded"
+                className="admin-btn-primary"
               >
                 Save
               </button>

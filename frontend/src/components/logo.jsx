@@ -2,11 +2,11 @@ import React from "react";
 
 export default function Logo() {
   return (
-    <div className="flex flex-col items-center mt-2 mb-6">
-      <div className="flex items-center justify-center w-20 h-20 border-2 border-white rounded-full">
-        <span className="text-2xl font-semibold text-white">N</span>
+    <div className="mb-8 mt-2 flex flex-col items-center">
+      <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-white/80 bg-white/10 shadow-sm backdrop-blur-sm transition duration-300 hover:scale-[1.03]">
+        <span className="text-2xl font-semibold tracking-wide text-white">N</span>
       </div>
-      <p className="mt-2 text-lg font-light tracking-wide text-white">
+      <p className="mt-3 text-base font-light tracking-[0.12em] text-white/95">
         Nagendra Kumar
       </p>
     </div>

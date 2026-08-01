@@ -89,76 +89,76 @@ export default function Profile() {
     loadProfile();
   }, []);
 
-  if (loading) return <div className="p-6">Loading...</div>;
+  if (loading) return <div className="py-10 text-sm font-medium text-white/50">Loading...</div>;
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-semibold text-[#009E66]">Profile</h1>
+    <div className="mx-auto max-w-3xl space-y-6">
+      <h1 className="admin-page-title">Profile</h1>
 
-      <div className="p-6 space-y-4 bg-white rounded-lg shadow">
+      <div className="admin-card space-y-5">
 
         {/* Image Upload */}
         <div>
-          <label className="font-semibold">Profile Image</label>
-          <input type="file" accept="image/*" onChange={uploadImage} className="w-full p-2 border rounded" />
-          <img src={data.profileImage || "https://via.placeholder.com/150"} className="w-32 h-32 mt-3 rounded-full border-2 border-[#009E66] object-cover" alt="profile" />
+          <label className="admin-label">Profile Image</label>
+          <input type="file" accept="image/*" onChange={uploadImage} className="block w-full text-sm text-white/55 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand hover:file:bg-brand-100" />
+          <img src={data.profileImage || "https://via.placeholder.com/150"} className="mt-4 h-32 w-32 rounded-full object-cover shadow-soft ring-2 ring-brand/30" alt="profile" />
         </div>
 
         {/* Name */}
         <div>
-          <label className="font-semibold">Name</label>
-          <input type="text" className="w-full p-2 border rounded" value={data.name} onChange={(e) => setData({ ...data, name: e.target.value })} />
+          <label className="admin-label">Name</label>
+          <input type="text" className="admin-input" value={data.name} onChange={(e) => setData({ ...data, name: e.target.value })} />
         </div>
 
         {/* Designation */}
         <div>
-          <label className="font-semibold">Designation</label>
-          <input type="text" className="w-full p-2 border rounded" value={data.designation} onChange={(e) => setData({ ...data, designation: e.target.value })} />
+          <label className="admin-label">Designation</label>
+          <input type="text" className="admin-input" value={data.designation} onChange={(e) => setData({ ...data, designation: e.target.value })} />
         </div>
 
         {/* Department */}
         <div>
-          <label className="font-semibold">Department</label>
-          <input type="text" className="w-full p-2 border rounded" value={data.department} onChange={(e) => setData({ ...data, department: e.target.value })} />
+          <label className="admin-label">Department</label>
+          <input type="text" className="admin-input" value={data.department} onChange={(e) => setData({ ...data, department: e.target.value })} />
         </div>
 
         {/* Institute */}
         <div>
-          <label className="font-semibold">Institute</label>
-          <input type="text" className="w-full p-2 border rounded" value={data.institute} onChange={(e) => setData({ ...data, institute: e.target.value })} />
+          <label className="admin-label">Institute</label>
+          <input type="text" className="admin-input" value={data.institute} onChange={(e) => setData({ ...data, institute: e.target.value })} />
         </div>
 
         {/* Biography */}
         <div>
-          <label className="font-semibold">Biography</label>
-          <textarea className="w-full h-32 p-2 border rounded" value={data.biography} onChange={(e) => setData({ ...data, biography: e.target.value })} />
+          <label className="admin-label">Biography</label>
+          <textarea className="admin-input h-32 resize-y" value={data.biography} onChange={(e) => setData({ ...data, biography: e.target.value })} />
         </div>
 
         {/* Education */}
         <div>
-          <label className="font-semibold">Education (comma separated)</label>
-          <input className="w-full p-2 border rounded" value={data.education.join(", ")} onChange={(e) => setData({ ...data, education: e.target.value.split(",") })} />
+          <label className="admin-label">Education (comma separated)</label>
+          <input className="admin-input" value={data.education.join(", ")} onChange={(e) => setData({ ...data, education: e.target.value.split(",") })} />
         </div>
 
         {/* Professional Experience */}
         <div>
-          <label className="font-semibold">Professional Experience (comma separated)</label>
-          <input className="w-full p-2 border rounded" value={data.professionalExperience.join(", ")} onChange={(e) => setData({ ...data, professionalExperience: e.target.value.split(",") })} />
+          <label className="admin-label">Professional Experience (comma separated)</label>
+          <input className="admin-input" value={data.professionalExperience.join(", ")} onChange={(e) => setData({ ...data, professionalExperience: e.target.value.split(",") })} />
         </div>
 
         {/* Teaching */}
         <div>
-          <label className="font-semibold">Teaching (comma separated)</label>
-          <input className="w-full p-2 border rounded" value={data.teaching.join(", ")} onChange={(e) => setData({ ...data, teaching: e.target.value.split(",") })} />
+          <label className="admin-label">Teaching (comma separated)</label>
+          <input className="admin-input" value={data.teaching.join(", ")} onChange={(e) => setData({ ...data, teaching: e.target.value.split(",") })} />
         </div>
 
         {/* Recognition */}
         <div>
-          <label className="font-semibold">Recognition (comma separated)</label>
-          <input className="w-full p-2 border rounded" value={data.recognition.join(", ")} onChange={(e) => setData({ ...data, recognition: e.target.value.split(",") })} />
+          <label className="admin-label">Recognition (comma separated)</label>
+          <input className="admin-input" value={data.recognition.join(", ")} onChange={(e) => setData({ ...data, recognition: e.target.value.split(",") })} />
         </div>
 
-        <button onClick={saveProfile} className="px-4 py-2 bg-[#009E66] text-white rounded-lg hover:bg-[#007a4f]" disabled={saving}>
+        <button onClick={saveProfile} className="admin-btn-primary" disabled={saving}>
           {saving ? "Saving..." : "Save Changes"}
         </button>
       </div>

@@ -1,12 +1,18 @@
+import { motion } from "framer-motion";
+
 export default function Footer() {
   return (
-    <footer className="flex justify-center w-full px-4 mt-16">
+    <footer className="flex justify-center w-full px-4 pb-10 mt-10">
 
-      <div className="
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="
         w-full
         max-w-[700px]
-        border border-[#009E66]
-       
+        border border-[#009E66]/70
         px-6
         py-5
         flex
@@ -15,8 +21,12 @@ export default function Footer() {
         items-center
         justify-between
         gap-4
-        bg-black
-      ">
+        bg-black/60
+        backdrop-blur-md
+        shadow-glow
+        rounded-2xl
+      "
+      >
 
         {/* LEFT TEXT */}
         <p className="text-xs tracking-widest text-center text-white sm:text-sm md:text-base md:text-left">
@@ -41,15 +51,17 @@ export default function Footer() {
             sm:text-sm
             font-semibold
             tracking-wide
-            transition
+            transition duration-300
             hover:bg-[#009E66]
             hover:text-black
+            hover:shadow-glow
+            rounded-lg
           "
         >
           Portfolio
         </a>
 
-      </div>
+      </motion.div>
 
     </footer>
   );

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import api from "../api/api";
 import { Helmet } from "react-helmet-async";
-import PageAnimation from "../components/PageAnimation";
+import PageAnimation, { ScrollReveal } from "../components/PageAnimation";
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -21,7 +22,7 @@ export default function Home() {
 
   return (
     <PageAnimation>
-      <div className="w-full min-h-screen text-white">
+      <div className="w-full text-white">
 
         <Helmet>
           <title>Dr Nagendra Kumar | Assistant Professor | IIIT Vadodara</title>
@@ -44,73 +45,78 @@ export default function Home() {
           />
         </Helmet>
 
-        {/* TEXT SECTION */}
-        <div className="px-4 sm:px-6 md:px-10 lg:px-20 max-w-[1700px] mx-auto mt-[-45px]">
-
-          <p className="text-[15px] sm:text-[16px] md:text-[18px] leading-8 text-left">
-
-            The Nagendra Lab is part of the Department of Physical Sciences,
-
-            <span className="font-semibold text-[#009e66]">
-              {" "}
-              {data?.title},{" "}
-            </span>
-
-            {data?.description}
-
-          </p>
-
-        </div>
+        {/* TEXT SECTION — full admin description, no clipping */}
+        <ScrollReveal>
+          <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[17px] lg:text-[18px] leading-7 sm:leading-8 md:leading-9 tracking-wide text-left text-white/90 whitespace-pre-wrap break-words overflow-visible w-full max-w-none">
+              {data?.description}
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* IMAGE SECTION */}
-        <div className="px-4 sm:px-6 md:px-10 lg:px-20 max-w-[1700px] mx-auto mt-5">
+        <ScrollReveal delay={0.12}>
+          <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 mt-6 sm:mt-8">
 
-          <div className="flex flex-col overflow-hidden shadow-2xl md:flex-row">
+            <div className="flex flex-col overflow-hidden border shadow-2xl border-white/10 md:flex-row rounded-xl sm:rounded-2xl shadow-glow">
 
-            {/* Hero Image */}
-            <div className="w-full md:w-1/2 h-[240px] sm:h-[280px] md:h-[330px] bg-black">
+              {/* Hero Image */}
+              <motion.div
+                className="w-full md:w-1/2 h-[200px] xs:h-[220px] sm:h-[260px] md:h-[300px] lg:h-[340px] bg-black overflow-hidden"
+                whileHover={{ scale: 1.01 }}
+                transition={{ duration: 0.4 }}
+              >
 
-              {data?.heroImage && (
-                <img
-                  src={data.heroImage}
-                  alt="Hero"
-                  className="object-cover w-full h-full"
-                />
-              )}
+                {data?.heroImage && (
+                  <img
+                    src={data.heroImage}
+                    alt="Hero"
+                    className="object-cover w-full h-full transition duration-700 hover:scale-105"
+                  />
+                )}
 
-            </div>
+              </motion.div>
 
-            {/* Second Image */}
-            <div className="w-full md:w-1/2 h-[240px] sm:h-[280px] md:h-[330px] bg-black">
+              {/* Second Image */}
+              <motion.div
+                className="w-full md:w-1/2 h-[200px] sm:h-[260px] md:h-[300px] lg:h-[340px] bg-black overflow-hidden"
+                whileHover={{ scale: 1.01 }}
+                transition={{ duration: 0.4 }}
+              >
 
-              {data?.secondImage && (
-                <img
-                  src={data.secondImage}
-                  alt="Second"
-                  className="object-cover w-full h-full"
-                />
-              )}
+                {data?.secondImage && (
+                  <img
+                    src={data.secondImage}
+                    alt="Second"
+                    className="object-cover w-full h-full transition duration-700 hover:scale-105"
+                  />
+                )}
+
+              </motion.div>
 
             </div>
 
           </div>
-
-        </div>
+        </ScrollReveal>
 
         {/* BUTTON */}
-        <div className="w-full flex justify-end px-4 sm:px-6 md:px-20 mt-5 max-w-[1700px] mx-auto">
+        <ScrollReveal delay={0.2}>
+          <div className="w-full max-w-[1700px] mx-auto flex justify-center sm:justify-end px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 mt-4 sm:mt-6 pb-4">
 
-          <a href="#about">
+            <a href="#about">
 
-            <button
-              className="bg-[#009e66] mt-8 hover:bg-[#008756] transition text-white text-[15px] md:text-[17px] px-10 py-3 flex items-center gap-3"
-            >
-              Continue →
-            </button>
+              <motion.button
+                whileHover={{ scale: 1.04, x: 4 }}
+                whileTap={{ scale: 0.98 }}
+                className="brand-btn mt-4 sm:mt-6 w-full sm:w-auto"
+              >
+                Continue →
+              </motion.button>
 
-          </a>
+            </a>
 
-        </div>
+          </div>
+        </ScrollReveal>
 
       </div>
     </PageAnimation>

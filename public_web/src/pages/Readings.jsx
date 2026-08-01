@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import api from "../api/api";
 import { Helmet } from "react-helmet-async";
-import PageAnimation from "../components/PageAnimation";
+import PageAnimation, { ScrollReveal, StaggerContainer, StaggerItem } from "../components/PageAnimation";
 
 export default function PublicGeneralReadings() {
   const [list, setList] = useState([]);
@@ -42,14 +43,16 @@ export default function PublicGeneralReadings() {
         <div className="max-w-6xl px-4 py-10 mx-auto">
 
           {/* HEADING */}
-          <div className="flex justify-center mb-12">
-            <h1 className="border-2 border-[#009E66] text-[#009E66] text-2xl sm:text-3xl md:text-4xl font-semibold px-6 sm:px-10 py-3 sm:py-4 text-center">
-              General Readings
-            </h1>
-          </div>
+          <ScrollReveal>
+            <div className="flex justify-center mb-12">
+              <h1 className="section-title mt-0 mb-0">
+                General Readings
+              </h1>
+            </div>
+          </ScrollReveal>
 
           {/* LIST */}
-          <div className="space-y-8">
+          <StaggerContainer className="space-y-8">
 
             {list.length === 0 && (
               <div className="py-20 text-center text-gray-400">
@@ -58,15 +61,15 @@ export default function PublicGeneralReadings() {
             )}
 
             {list.map((item, index) => (
-              <div
+              <StaggerItem
                 key={item?._id || Math.random()}
-                className="flex flex-col md:flex-row border-2 border-[#009E66] overflow-hidden"
+                className="flex flex-col md:flex-row border-2 border-[#009E66]/70 overflow-hidden rounded-2xl shadow-soft hover:shadow-glow transition duration-300"
               >
 
                 {/* LEFT CONTENT */}
-                <div className="flex flex-col flex-1 p-5 sm:p-6">
+                <div className="flex flex-col flex-1 p-5 sm:p-6 bg-black/30 backdrop-blur-sm">
 
-                  <h2 className="text-lg font-semibold text-white sm:text-xl">
+                  <h2 className="text-lg font-semibold text-white sm:text-xl tracking-tight">
                     {index + 1}.{" "}
                     {item?.title || (
                       <span className="text-sm text-gray-400">
@@ -86,17 +89,19 @@ export default function PublicGeneralReadings() {
                 </div>
 
                 {/* RIGHT BUTTON AREA */}
-                <div className="w-full md:w-64 bg-[#009E66] flex items-center justify-center py-6 md:py-0">
+                <div className="w-full md:w-64 bg-gradient-to-br from-[#009E66] to-[#005C3B] flex items-center justify-center py-6 md:py-0">
 
                   {item?.link ? (
-                    <a
+                    <motion.a
                       href={item.link}
                       target="_blank"
                       rel="noreferrer"
-                      className="border border-white text-white px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-lg hover:bg-white hover:text-[#009E66] transition"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="border border-white text-white px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-lg hover:bg-white hover:text-[#009E66] transition rounded-lg"
                     >
                       Open Reading
-                    </a>
+                    </motion.a>
                   ) : (
                     <span className="text-sm text-white">
                       Link not available
@@ -105,10 +110,10 @@ export default function PublicGeneralReadings() {
 
                 </div>
 
-              </div>
+              </StaggerItem>
             ))}
 
-          </div>
+          </StaggerContainer>
 
         </div>
       </>

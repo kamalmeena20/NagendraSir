@@ -1,5 +1,4 @@
 
-
 import { useEffect, useState } from "react";
 import api from "../../api/api";
 
@@ -130,66 +129,66 @@ setForm({
     }
   };
 
-  if (loading) return <div className="p-6">Loading...</div>;
+  if (loading) return <div className="py-10 text-sm font-medium text-white/50">Loading...</div>;
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between">
-        <h1 className="text-3xl font-semibold text-[#009E66]">Team Members</h1>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="admin-page-title">Team Members</h1>
 
         <button
           onClick={openAddModal}
-          className="px-4 py-2 bg-[#009E66] text-white rounded-lg hover:bg-[#007a4f]"
+          className="admin-btn-primary"
         >
           + Add Member
         </button>
       </div>
 
    
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {members.map((m) => (
           <div
             key={m._id}
-            className="p-4 transition bg-white border rounded-lg shadow hover:shadow-lg"
+            className="admin-surface-card"
           >
             <img
               src={m.imageUrl || undefined}
               alt={m.name || "profile"}
-              className="w-24 h-24 rounded-full object-cover mx-auto border-2 border-[#009E66]"
+              className="mx-auto h-24 w-24 rounded-full object-cover shadow-soft ring-2 ring-brand/25"
             />
 
-            <h3 className="mt-3 text-xl font-semibold text-center">{m.name}</h3>
+            <h3 className="mt-4 text-center text-lg font-semibold text-white">{m.name}</h3>
 
             {/* ROLE */}
             {m.role && (
-              <p className="text-center text-gray-600">{m.role}</p>
+              <p className="mt-1 text-center text-sm text-white/70">{m.role}</p>
             )}
 
             {/* DEPARTMENT */}
             {m.department && (
-              <p className="text-sm text-center text-gray-500">
+              <p className="mt-1 text-center text-xs text-white/55">
                 Department: {m.department}
               </p>
             )}
 
             {/* EMAIL */}
             {m.email && (
-              <p className="text-sm text-center text-gray-500">
+              <p className="mt-1 text-center text-xs text-white/55">
                 Email: {m.email}
               </p>
             )}
 
-            <div className="flex justify-center gap-3 mt-4">
+            <div className="mt-5 flex justify-center gap-2">
               <button
                 onClick={() => openEditModal(m)}
-                className="px-3 py-1 text-white bg-blue-600 rounded hover:bg-blue-700"
+                className="admin-btn-edit"
               >
                 Edit
               </button>
 
               <button
                 onClick={() => deleteMember(m._id)}
-                className="px-3 py-1 text-white bg-red-600 rounded hover:bg-red-700"
+                className="admin-btn-danger"
               >
                 Delete
               </button>
@@ -201,19 +200,19 @@ setForm({
 
       {/* ADD / EDIT MODAL */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/40">
-          <div className="p-6 space-y-4 bg-white rounded-lg shadow-lg w-96">
+        <div className="admin-modal-overlay">
+          <div className="admin-modal-panel">
         
              <div className="flex items-center justify-between">
 
-               <h2 className="text-xl font-semibold text-[#009E66]">
+               <h2 className="text-xl font-semibold tracking-tight text-brand">
               {editId ? "Edit Member" : "Add Member"}
             </h2>
 
               {/* CLOSE BUTTON */}
               <button
                 onClick={() => setShowModal(false)}
-                className="text-xl font-bold text-gray-500 hover:text-red-500"
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-white/40 transition hover:bg-white/10 hover:text-rose-500"
               >
                 ✕
               </button>
@@ -221,27 +220,27 @@ setForm({
             </div>
 
             <input
-              className="w-full p-2 border rounded"
+              className="admin-input"
               placeholder="Name"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
 
             <input
-              className="w-full p-2 border rounded"
+              className="admin-input"
               placeholder="Role"
               value={form.role}
               onChange={(e) => setForm({ ...form, role: e.target.value })}
             />
             <input
-              className="w-full p-2 border rounded"
+              className="admin-input"
               placeholder="Department"
               value={form.department}
               onChange={(e) => setForm({ ...form, department: e.target.value })}
             />
 
             <input
-              className="w-full p-2 border rounded"
+              className="admin-input"
               placeholder="Email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -253,21 +252,21 @@ setForm({
               type="file"
               accept="image/*"
               onChange={uploadTeamImage}
-              className="w-full p-2 border rounded"
+              className="block w-full text-sm text-white/55 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand hover:file:bg-brand-100"
             />
 
             {form.imageUrl && (
               <img
                 src={form.imageUrl}
                 alt="preview"
-                className="w-20 h-20 mt-2 mx-auto rounded-full border border-[#009E66]"
+                className="mx-auto mt-1 h-20 w-20 rounded-full object-cover shadow-soft ring-2 ring-brand/25"
               />
             )}
 
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-end gap-2 pt-2">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-3 py-1 bg-gray-300 rounded"
+                className="admin-btn-secondary"
               >
                 Cancel
               </button>
@@ -275,8 +274,7 @@ setForm({
               <button
                 onClick={saveMember}
                 disabled={uploading}
-                className={`px-3 py-1 text-white rounded ${uploading ? "bg-[#007a4f] cursor-not-allowed" : "bg-[#009E66] hover:bg-[#007a4f]"
-                  }`}
+                className="admin-btn-primary"
               >
                 {uploading ? "Uploading..." : "Save"}
               </button>

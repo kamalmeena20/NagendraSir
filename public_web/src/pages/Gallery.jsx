@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import api from "../api/api";
 import { Helmet } from "react-helmet-async";
-import PageAnimation from "../components/PageAnimation";
+import PageAnimation, { ScrollReveal, StaggerContainer, StaggerItem } from "../components/PageAnimation";
 
 export default function Gallery() {
   const [images, setImages] = useState([]);
@@ -42,15 +43,17 @@ export default function Gallery() {
         </Helmet>
 
         {/* PAGE TITLE */}
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center text-[#009E66] mt-10 mb-10 py-2 px-6 border-2 border-[#009e66]">
-          Gallery
-        </h1>
+        <ScrollReveal>
+          <h1 className="section-title">
+            Gallery
+          </h1>
+        </ScrollReveal>
 
         {/* GALLERY GRID */}
-        <div
-          className="grid w-full max-w-7xl gap-6 px-4 overflow-y-auto
-          grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3
-          h-[75vh] md:h-[80vh] lg:h-auto"
+        <StaggerContainer
+          className="grid w-full max-w-7xl gap-4 sm:gap-6 px-4 overflow-visible sm:overflow-y-auto
+          grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+          max-h-none sm:max-h-[70vh] lg:max-h-none"
           style={{ scrollbarWidth: "none" }}
         >
 
@@ -61,10 +64,10 @@ export default function Gallery() {
           )}
 
           {images.map((img) => (
-            <div
+            <StaggerItem
               key={img?._id || Math.random()}
               className="relative overflow-hidden shadow-lg cursor-pointer rounded-xl group
-              h-[35vh] md:h-[30vh] lg:h-[260px]"
+              h-[220px] sm:h-[240px] md:h-[260px] border border-white/10 hover:border-brand/50 transition duration-300 hover:shadow-glow"
               onClick={() => img?.imageUrl && setPreview(img)}
             >
 
@@ -78,10 +81,10 @@ export default function Gallery() {
               />
 
               {/* OVERLAY */}
-              <div className="absolute inset-0 flex flex-col justify-end p-4 transition duration-300 opacity-0 bg-black/60 group-hover:opacity-100">
+              <div className="absolute inset-0 flex flex-col justify-end p-4 transition duration-300 opacity-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:opacity-100">
 
                 {img?.event && (
-                  <p className="text-sm text-green-300">
+                  <p className="text-sm text-brand-400">
                     Event: {img.event}
                   </p>
                 )}
@@ -100,40 +103,53 @@ export default function Gallery() {
 
               </div>
 
-            </div>
+            </StaggerItem>
           ))}
 
-        </div>
+        </StaggerContainer>
 
         {/* IMAGE PREVIEW MODAL */}
-        {preview?.imageUrl && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
+        <AnimatePresence>
+          {preview?.imageUrl && (
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
 
-            <div className="relative w-full max-w-4xl">
-
-              <button
-                className="absolute text-3xl text-white top-2 right-2"
-                onClick={() => setPreview(null)}
+              <motion.div
+                className="relative w-full max-w-4xl"
+                initial={{ scale: 0.92, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.92, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 260, damping: 22 }}
               >
-                ✕
-              </button>
 
-              <img
-                src={preview.imageUrl}
-                alt="preview"
-                className="w-full shadow-lg rounded-xl"
-              />
+                <button
+                  className="absolute text-3xl text-white transition top-2 right-2 hover:text-brand-400"
+                  onClick={() => setPreview(null)}
+                >
+                  ✕
+                </button>
 
-              {preview?.title && (
-                <p className="mt-4 text-xl text-center text-white">
-                  {preview.title}
-                </p>
-              )}
+                <img
+                  src={preview.imageUrl}
+                  alt="preview"
+                  className="w-full shadow-glow rounded-xl border border-white/10"
+                />
 
-            </div>
+                {preview?.title && (
+                  <p className="mt-4 text-xl text-center text-white">
+                    {preview.title}
+                  </p>
+                )}
 
-          </div>
-        )}
+              </motion.div>
+
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </div>
     </PageAnimation>

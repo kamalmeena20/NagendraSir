@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import ExperienceModal from "../components/profileModal/ExperienceModal";
 import EducationModal from "../components/profileModal/EducationModal";
 import TeachingModal from "../components/profileModal/TeachingModal";
 import RecognitionModal from "../components/profileModal/RecognitionModal";
 import api from "../api/api";
 import { Helmet } from "react-helmet-async";
-import PageAnimation from "../components/PageAnimation";
+import PageAnimation, { ScrollReveal, StaggerContainer, StaggerItem } from "../components/PageAnimation";
 
 export default function Profile() {
 
@@ -44,116 +45,132 @@ export default function Profile() {
         </Helmet>
 
         {/* PAGE TITLE */}
-        <h1 className="text-3xl md:text-4xl font-semibold text-center text-[#009E66] mt-10 mb-12 py-2 px-10 border-2 border-[#009e66] w-fit">
-          Profile
-        </h1>
+        <ScrollReveal>
+          <h1 className="section-title">
+            Profile
+          </h1>
+        </ScrollReveal>
 
         <div className="w-full max-w-6xl px-6 mx-auto">
 
           {/* HEADER */}
-          <div className="flex flex-col items-center gap-10 md:flex-row md:items-start">
+          <ScrollReveal>
+            <div className="flex flex-col items-center gap-10 glass-panel p-6 sm:p-8 md:flex-row md:items-start">
 
-            {/* IMAGE */}
-            <div className="flex-shrink-0">
-              <div
-                className="border-2 rounded-full w-36 h-36 md:w-44 md:h-44"
-                style={{ borderColor: mainColor }}
-              >
-                <img
-                  src={data?.profileImage || "https://via.placeholder.com/300"}
-                  alt="profile"
-                  className="object-cover w-full h-full rounded-full"
+              {/* IMAGE */}
+              <div className="flex-shrink-0">
+                <motion.div
+                  className="border-2 rounded-full w-36 h-36 md:w-44 md:h-44 overflow-hidden shadow-glow"
+                  style={{ borderColor: mainColor }}
+                  whileHover={{ scale: 1.04 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                >
+                  <img
+                    src={data?.profileImage || "https://via.placeholder.com/300"}
+                    alt="profile"
+                    className="object-cover w-full h-full rounded-full"
+                  />
+                </motion.div>
+              </div>
+
+              {/* TEXT */}
+              <div className="flex flex-col items-center flex-1 gap-6 text-start md:flex-row md:items-start md:text-left">
+
+                <div
+                  className="hidden md:block w-[2px] h-36 rounded-full"
+                  style={{ backgroundColor: mainColor }}
                 />
+
+                <div>
+                  <h2 className="text-xl font-bold md:text-2xl tracking-tight">
+                    {data?.name || <span className="text-base font-normal text-gray-400">Name not available</span>}
+                  </h2>
+
+                  <p className="text-lg text-white/85">
+                    {data?.designation || <span className="text-sm text-gray-400">Designation not available</span>}
+                  </p>
+
+                  <p className="text-lg text-white/85">
+                    {data?.department || <span className="text-sm text-gray-400">Department not available</span>}
+                  </p>
+
+                  <p className="text-lg text-white/85">
+                    {data?.institute || <span className="text-sm text-gray-400">Institute not available</span>}
+                  </p>
+                </div>
+
               </div>
             </div>
-
-            {/* TEXT */}
-            <div className="flex flex-col items-center flex-1 gap-6 text-start md:flex-row md:items-start md:text-left">
-
-              <div
-                className="hidden md:block w-[2px] h-36 rounded-full"
-                style={{ backgroundColor: mainColor }}
-              />
-
-              <div>
-                <h2 className="text-xl font-bold md:text-2xl">
-                  {data?.name || <span className="text-base font-normal text-gray-400">Name not available</span>}
-                </h2>
-
-                <p className="text-lg">
-                  {data?.designation || <span className="text-sm text-gray-400">Designation not available</span>}
-                </p>
-
-                <p className="text-lg">
-                  {data?.department || <span className="text-sm text-gray-400">Department not available</span>}
-                </p>
-
-                <p className="text-lg">
-                  {data?.institute || <span className="text-sm text-gray-400">Institute not available</span>}
-                </p>
-              </div>
-
-            </div>
-          </div>
+          </ScrollReveal>
 
           {/* BIOGRAPHY */}
-          <div className="mt-10 text-start md:text-left">
+          <ScrollReveal delay={0.1}>
+            <div className="mt-10 text-start md:text-left">
 
-            <h3
-              className="mb-4 text-2xl font-semibold text-left"
-              style={{ color: mainColor }}
-            >
-              Brief Biography:
-            </h3>
+              <h3
+                className="mb-4 text-2xl font-semibold text-left tracking-tight"
+                style={{ color: mainColor }}
+              >
+                Brief Biography:
+              </h3>
 
-            <p className="leading-relaxed text-[16px] md:text-[17px] max-w-3xl">
-              {data?.biography || (
-                <span className="text-sm text-gray-400">
-                  Biography not available.
-                </span>
-              )}
-            </p>
+              <p className="leading-relaxed text-[15px] sm:text-[16px] md:text-[17px] max-w-3xl text-white/90 whitespace-pre-wrap break-words">
+                {data?.biography || (
+                  <span className="text-sm text-gray-400">
+                    Biography not available.
+                  </span>
+                )}
+              </p>
 
-          </div>
+            </div>
+          </ScrollReveal>
 
           {/* BUTTONS */}
-          <div className="grid grid-cols-1 gap-6 mt-16 sm:grid-cols-3 md:grid-cols-3">
+          <StaggerContainer className="grid grid-cols-1 gap-6 mt-16 sm:grid-cols-3 md:grid-cols-3">
 
-            <button
-              className="w-full py-3 text-lg font-semibold border-2 text-[#009E66] border-[#009E66] transition-all duration-300 hover:bg-[#009E66] hover:text-white"
-              onClick={() => setShowExpModal(true)}
-            >
-              Professional Experience
-            </button>
+            <StaggerItem>
+              <button
+                className="brand-outline-btn w-full"
+                onClick={() => setShowExpModal(true)}
+              >
+                Professional Experience
+              </button>
+            </StaggerItem>
 
-            <button
-              className="w-full py-3 text-lg font-semibold border-2 text-[#009E66] border-[#009E66] transition-all duration-300 hover:bg-[#009E66] hover:text-white"
-              onClick={() => setShowTeaching(true)}
-            >
-              Teaching
-            </button>
+            <StaggerItem>
+              <button
+                className="brand-outline-btn w-full"
+                onClick={() => setShowTeaching(true)}
+              >
+                Teaching
+              </button>
+            </StaggerItem>
 
-            <button
-              className="w-full py-3 text-lg font-semibold border-2 text-[#009E66] border-[#009E66] transition-all duration-300 hover:bg-[#009E66] hover:text-white"
-              onClick={() => setShowEducation(true)}
-            >
-              Education
-            </button>
+            <StaggerItem>
+              <button
+                className="brand-outline-btn w-full"
+                onClick={() => setShowEducation(true)}
+              >
+                Education
+              </button>
+            </StaggerItem>
 
-          </div>
+          </StaggerContainer>
 
           {/* RECOGNITION */}
-          <div className="flex justify-center mt-6">
+          <ScrollReveal delay={0.15}>
+            <div className="flex justify-center mt-6">
 
-            <button
-              className="px-10 md:px-40 py-3 text-lg font-semibold border-2 transition-all duration-300 hover:bg-[#009E66] hover:!text-white"
-              style={{ borderColor: mainColor, color: mainColor }}
-              onClick={() => setShowRecognition(true)}
-            >
-              Recognition
-            </button>
+              <button
+                className="w-full sm:w-auto px-8 sm:px-16 md:px-40 py-3 text-base sm:text-lg font-semibold border-2 transition-all duration-300 hover:bg-[#009E66] hover:!text-white hover:shadow-glow"
+                style={{ borderColor: mainColor, color: mainColor }}
+                onClick={() => setShowRecognition(true)}
+              >
+                Recognition
+              </button>
 
-          </div>
+            </div>
+          </ScrollReveal>
 
         </div>
 

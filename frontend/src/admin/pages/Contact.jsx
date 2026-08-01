@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import api from "../../api/api";
 
@@ -94,144 +93,144 @@ export default function Contact() {
     setSaving(false);
   };
 
-  if (loading) return <div className="p-6">Loading...</div>;
+  if (loading) return <div className="py-10 text-sm font-medium text-white/50">Loading...</div>;
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-semibold text-[#009E66]">Contact Info</h1>
+    <div className="mx-auto max-w-3xl space-y-6">
+      <h1 className="admin-page-title">Contact Info</h1>
 
-      <div className="p-6 space-y-4 bg-white rounded-lg shadow">
+      <div className="admin-card space-y-5">
 
         {/* PHOTO UPLOAD */}
         <div>
-          <label className="font-semibold">Upload Photo</label>
+          <label className="admin-label">Upload Photo</label>
           <input
             type="file"
             accept="image/*"
             onChange={uploadContactImage}
-            className="w-full p-2 border rounded"
+            className="block w-full text-sm text-white/55 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand hover:file:bg-brand-100"
           />
 
           <img
             src={data.photoUrl || "https://via.placeholder.com/120"}
-            className="w-32 h-32 mt-3 rounded-full border-2 border-[#009E66] object-cover"
+            className="mt-4 h-32 w-32 rounded-full object-cover shadow-soft ring-2 ring-brand/30"
             alt="loading"
           />
 
-          {uploading && <p className="text-sm text-blue-500">Uploading...</p>}
+          {uploading && <p className="mt-2 text-sm font-medium text-sky-600">Uploading...</p>}
         </div>
 
         {/* NAME */}
         <div>
-          <label className="font-semibold">Name</label>
+          <label className="admin-label">Name</label>
           <input
             type="text"
             value={data.name}
             onChange={(e) => setData({ ...data, name: e.target.value })}
-            className="w-full p-2 border rounded"
+            className="admin-input"
           />
         </div>
 
         {/* PROFESSION */}
         <div>
-          <label className="font-semibold">Profession</label>
+          <label className="admin-label">Profession</label>
           <input
             type="text"
             value={data.profession}
             onChange={(e) => setData({ ...data, profession: e.target.value })}
-            className="w-full p-2 border rounded"
+            className="admin-input"
           />
         </div>
 
         {/* DEPARTMENT */}
         <div>
-          <label className="font-semibold">Department</label>
+          <label className="admin-label">Department</label>
           <input
             type="text"
             value={data.department}
             onChange={(e) => setData({ ...data, department: e.target.value })}
-            className="w-full p-2 border rounded"
+            className="admin-input"
           />
         </div>
 
         {/* EMAILS */}
         <div>
-          <label className="font-semibold">Primary Email</label>
+          <label className="admin-label">Primary Email</label>
           <input
             type="text"
             value={data.emailPrimary}
             onChange={(e) => setData({ ...data, emailPrimary: e.target.value })}
-            className="w-full p-2 border rounded"
+            className="admin-input"
           />
         </div>
 
         <div>
-          <label className="font-semibold">Secondary Email</label>
+          <label className="admin-label">Secondary Email</label>
           <input
             type="text"
             value={data.emailSecondary}
             onChange={(e) => setData({ ...data, emailSecondary: e.target.value })}
-            className="w-full p-2 border rounded"
+            className="admin-input"
           />
         </div>
 
         {/* ADDRESS */}
         <div>
-          <label className="font-semibold">Address Line 1</label>
+          <label className="admin-label">Address Line 1</label>
           <input
             type="text"
             value={data.addressLine1}
             onChange={(e) =>
               setData({ ...data, addressLine1: e.target.value })
             }
-            className="w-full p-2 border rounded"
+            className="admin-input"
           />
         </div>
 
         <div>
-          <label className="font-semibold">City</label>
+          <label className="admin-label">City</label>
           <input
             type="text"
             value={data.city}
             onChange={(e) => setData({ ...data, city: e.target.value })}
-            className="w-full p-2 border rounded"
+            className="admin-input"
           />
         </div>
 
         <div>
-          <label className="font-semibold">State</label>
+          <label className="admin-label">State</label>
           <input
             type="text"
             value={data.state}
             onChange={(e) => setData({ ...data, state: e.target.value })}
-            className="w-full p-2 border rounded"
+            className="admin-input"
           />
         </div>
 
         <div>
-          <label className="font-semibold">Pincode</label>
+          <label className="admin-label">Pincode</label>
           <input
             type="text"
             value={data.pincode}
             onChange={(e) => setData({ ...data, pincode: e.target.value })}
-            className="w-full p-2 border rounded"
+            className="admin-input"
           />
         </div>
 
         <div>
-          <label className="font-semibold">Landmark</label>
+          <label className="admin-label">Landmark</label>
           <input
             type="text"
             value={data.landmark}
             onChange={(e) => setData({ ...data, landmark: e.target.value })}
-            className="w-full p-2 border rounded"
+            className="admin-input"
           />
         </div>
 
         {/* SAVE BUTTON */}
         <button
           onClick={saveContact}
-          className="px-4 py-2 bg-[#009E66] text-white rounded-lg hover:bg-[#007a4f]"
+          className="admin-btn-primary"
           disabled={saving}
         >
           {saving ? "Saving..." : "Save Changes"}
@@ -240,4 +239,3 @@ export default function Contact() {
     </div>
   );
 }
-

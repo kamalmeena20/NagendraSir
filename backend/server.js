@@ -17,6 +17,7 @@ const uploadRoutes = require("./routes/upload");
 const homeRoutes = require('./routes/home');
 const aboutRoutes = require('./routes/about');
 const careerRoutes = require('./routes/career');
+const academicActivityRoutes = require("./routes/academicActivityRoutes");
 
 const app = express();
 
@@ -27,11 +28,15 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 // MongoDB Connection
 console.log("Mongo URI:", process.env.MONGO_URI);
+
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected Successfully"))
+  .then(() => {
+    console.log("✅ MongoDB Connected Successfully");
+  })
   .catch((err) => {
-    console.error("MongoDB Connection Error:", err.message);
+    console.error("❌ MongoDB Connection Error:");
+    console.error(err); // <-- poora error print hoga
     process.exit(1);
   });
 
@@ -48,6 +53,7 @@ app.use("/api/career", careerRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use('/api/home', homeRoutes);
 app.use('/api/about', aboutRoutes);
+app.use("/api/academic-activities", academicActivityRoutes);
 
 
 // Health Check
